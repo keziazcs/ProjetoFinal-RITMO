@@ -1,0 +1,276 @@
+<main class="auth-page">
+
+  <!-- BACKGROUND -->
+  <div class="background-carousel" aria-hidden="true">
+
+    <div
+      class="background-slide"
+      [class.active]="slideAtual === 0"
+      style="background-image: url('/images/background-4.jpg')">
+    </div>
+
+    <div
+      class="background-slide"
+      [class.active]="slideAtual === 1"
+      style="background-image: url('/images/background-3.jpg')">
+    </div>
+
+    <div
+      class="background-slide"
+      [class.active]="slideAtual === 2"
+      style="background-image: url('/images/background-2.jpg')">
+    </div>
+
+    <div
+      class="background-slide"
+      [class.active]="slideAtual === 3"
+      style="background-image: url('/images/background-5.jpg')">
+    </div>
+
+    <div
+      class="background-slide"
+      [class.active]="slideAtual === 4"
+      style="background-image: url('/images/background-1.jpg')">
+    </div>
+
+  </div>
+
+  <div class="background-overlay"></div>
+
+
+  <!-- CONTEÚDO -->
+  <div class="auth-layout">
+
+    <!-- MARCA -->
+    <section class="brand-area">
+
+      <div class="brand-name">
+        Ritmo<span>.</span>
+      </div>
+
+      <p class="brand-register">
+        REGISTRO DO RITMO
+      </p>
+
+      <div class="brand-copy-placeholder">
+        Frase oficial da marca
+      </div>
+
+    </section>
+
+
+    <!-- CARD -->
+    <section class="auth-card">
+
+      <!-- ÍCONE DA MARCA -->
+      <div class="brand-icon-placeholder">
+        ÍCONE
+      </div>
+
+
+      @if (modo === 'login') {
+
+        <header class="auth-header">
+          <h1>
+            Bem-vindo!
+          </h1>
+
+          <p>
+            Entre para continuar vivendo o dia no seu ritmo.
+          </p>
+        </header>
+
+
+        <form class="auth-form">
+
+          <div class="field">
+            <label for="email">
+              E-mail
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="seuemail@email.com">
+          </div>
+
+
+          <div class="field">
+            <div class="field-heading">
+
+              <label for="senha">
+                Senha
+              </label>
+
+              <a href="#">
+                Esqueci minha senha
+              </a>
+
+            </div>
+
+            <input
+              id="senha"
+              name="senha"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Digite sua senha">
+          </div>
+
+
+          <label class="lgpd-box">
+
+            <input
+              type="checkbox"
+              name="lgpdLogin">
+
+            <span>
+              Li e concordo com os
+              <a href="#">Termos de Uso</a>
+              e com a
+              <a href="#">Política de Privacidade</a>.
+            </span>
+
+          </label>
+
+
+          <button
+            (click)="criarConta()"
+            type="button"
+            class="primary-button">
+            Entrar
+          </button>
+
+        </form>
+
+
+        <div class="account-alternative">
+
+          <span>
+            Ainda não tem uma conta?
+          </span>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="mostrarCadastro()">
+            Criar conta
+          </button>
+
+        </div>
+
+      }
+
+
+      @if (modo === 'cadastro') {
+
+        <header class="auth-header">
+
+          <h1>
+            Bem-vindo ao Ritmo!
+          </h1>
+
+          <p>
+            Crie sua conta para começar.
+          </p>
+
+        </header>
+
+
+        <form class="auth-form">
+
+          <div class="field">
+
+            <label for="nome">
+              Nome
+            </label>
+
+            <input
+              id="nome"
+              name="nome"
+              type="text"
+              autocomplete="name"
+              placeholder="Seu nome">
+          </div>
+
+
+          <div class="field">
+
+            <label for="novo-email">
+              E-mail
+            </label>
+
+            <input
+              id="novo-email"
+              name="novoEmail"
+              type="email"
+              autocomplete="email"
+              placeholder="seuemail@email.com">
+          </div>
+
+
+          <div class="field">
+
+            <label for="nova-senha">
+              Senha
+            </label>
+
+            <input
+              id="nova-senha"
+              name="novaSenha"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Crie uma senha">
+          </div>
+
+
+          <label class="lgpd-box">
+
+            <input
+              type="checkbox"
+              name="lgpdCadastro">
+
+            <span>
+              Li e concordo com os
+              <a href="#">Termos de Uso</a>
+              e com a
+              <a href="#">Política de Privacidade</a>.
+            </span>
+
+          </label>
+
+
+          <button
+            (click)="criarConta()"
+            type="button"
+            class="primary-button">
+            
+            Criar minha conta
+          </button>
+
+        </form>
+
+
+        <div class="account-alternative">
+
+          <span>
+            Já possui uma conta?
+          </span>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="mostrarLogin()">
+            Entrar
+          </button>
+
+        </div>
+
+      }
+
+    </section>
+
+  </div>
+
+</main>

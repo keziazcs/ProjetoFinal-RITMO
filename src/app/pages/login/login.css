@@ -1,0 +1,646 @@
+:host {
+  display: block;
+}
+
+
+/* =========================
+   PÁGINA
+========================= */
+
+.auth-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  background: #15231c;
+
+  color: #f5f1e8;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background-carousel {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+}
+
+.background-slide {
+  position: absolute;
+  inset: 0;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  opacity: 0;
+
+  transform: scale(1.035);
+
+  transition:
+    opacity 1.4s ease,
+    transform 7s ease;
+}
+
+.background-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* Foto → cor */
+
+.background-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(14, 29, 22, 0.26) 0%,
+      rgba(14, 29, 22, 0.42) 38%,
+      rgba(21, 35, 28, 0.88) 72%,
+      rgba(21, 35, 28, 0.98) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(8, 19, 14, 0.32),
+      transparent 45%
+    );
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.auth-layout {
+  position: relative;
+
+  z-index: 2;
+
+  min-height: 100vh;
+
+  width: min(1440px, 100%);
+
+  margin: 0 auto;
+
+  padding:
+    clamp(28px, 5vw, 72px);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(360px, 470px);
+
+  align-items: center;
+
+  gap:
+    clamp(50px, 8vw, 130px);
+}
+
+
+/* =========================
+   MARCA
+========================= */
+
+.brand-area {
+  align-self: end;
+
+  max-width: 640px;
+
+  padding-bottom:
+    clamp(40px, 7vh, 90px);
+}
+
+.brand-name {
+  font-family: 'Fraunces', serif;
+
+  font-size:
+    clamp(64px, 9vw, 126px);
+
+  font-weight: 600;
+
+  line-height: 0.85;
+
+  letter-spacing: -4px;
+
+  color: #f5f1e8;
+}
+
+.brand-name span {
+  color: #B9A6CE;
+}
+
+.brand-register {
+  margin:
+    25px 0 12px;
+
+  font-family:
+    'Work Sans',
+    sans-serif;
+
+  color: #AACBDA;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2.4px;
+}
+
+.brand-copy-placeholder {
+  display: inline-flex;
+
+  min-height: 42px;
+
+  align-items: center;
+
+  padding:
+    0 15px;
+
+  border:
+    1px dashed
+    rgba(245, 241, 232, 0.30);
+
+  border-radius: 999px;
+
+  color:
+    rgba(245, 241, 232, 0.64);
+
+  font-family:
+    'Work Sans',
+    sans-serif;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   CARD FLUTUANTE
+========================= */
+
+.auth-card {
+  width: 100%;
+
+  padding:
+    clamp(28px, 4vw, 45px);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.13);
+
+  border-radius: 30px;
+
+  background:
+    rgba(20, 36, 28, 0.80);
+
+  box-shadow:
+    0 30px 80px
+    rgba(0, 0, 0, 0.30);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+}
+
+
+/* =========================
+   ÍCONE
+========================= */
+
+.brand-icon-placeholder {
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 30px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px dashed
+    rgba(170, 203, 218, 0.50);
+
+  border-radius: 17px;
+
+  background:
+    rgba(170, 203, 218, 0.06);
+
+  color: #AACBDA;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================
+   HEADER CARD
+========================= */
+
+.auth-header {
+  margin-bottom: 30px;
+}
+
+.auth-header h1 {
+  margin: 0 0 10px;
+
+  font-family:
+    'Fraunces',
+    serif;
+
+  font-size:
+    clamp(30px, 3vw, 40px);
+
+  font-weight: 600;
+
+  line-height: 1.08;
+}
+
+.auth-header p {
+  margin: 0;
+
+  color: #b9c4bd;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.auth-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.field-heading {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+.field label {
+  color: #eef1ed;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.field-heading a {
+  color: #AACBDA;
+
+  font-size: 11px;
+
+  text-decoration: none;
+}
+
+.field-heading a:hover {
+  text-decoration: underline;
+}
+
+.field input {
+  width: 100%;
+
+  min-height: 50px;
+
+  padding:
+    0 16px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  border-radius: 15px;
+
+  outline: none;
+
+  background:
+    rgba(10, 26, 19, 0.60);
+
+  color: #f5f1e8;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.field input::placeholder {
+  color: #79877f;
+}
+
+.field input:hover {
+  border-color:
+    rgba(170, 203, 218, 0.40);
+}
+
+.field input:focus {
+  border-color: #AACBDA;
+
+  background:
+    rgba(10, 26, 19, 0.78);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(170, 203, 218, 0.10);
+}
+
+
+/* =========================
+   LGPD
+========================= */
+
+.lgpd-box {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  padding:
+    14px 15px;
+
+  border:
+    1px solid
+    rgba(124, 143, 99, 0.30);
+
+  border-radius: 16px;
+
+  background:
+    rgba(124, 143, 99, 0.08);
+
+  color: #b7c0ba;
+
+  font-size: 10.5px;
+
+  line-height: 1.5;
+
+  cursor: pointer;
+}
+
+.lgpd-box input {
+  width: 16px;
+  height: 16px;
+
+  flex-shrink: 0;
+
+  margin-top: 1px;
+
+  accent-color: #7C8F63;
+}
+
+.lgpd-box a {
+  color: #AACBDA;
+
+  text-decoration: none;
+}
+
+.lgpd-box a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   BOTÃO PRINCIPAL
+========================= */
+
+.primary-button {
+  width: 100%;
+
+  min-height: 50px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: #B9A6CE;
+
+  color: #17251e;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primary-button:hover {
+  background: #c8b8d7;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 12px 30px
+    rgba(185, 166, 206, 0.18);
+}
+
+
+/* =========================
+   CRIAR CONTA / ENTRAR
+========================= */
+
+.account-alternative {
+  margin-top: 25px;
+
+  padding-top: 22px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  color: #93a098;
+
+  font-size: 11px;
+}
+
+.secondary-button {
+  padding: 4px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #AACBDA;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-decoration: underline;
+
+  text-underline-offset: 3px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+
+  .auth-layout {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(350px, 420px);
+
+    gap: 45px;
+
+    padding: 36px;
+  }
+
+  .brand-name {
+    letter-spacing: -3px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 760px) {
+
+  .auth-page {
+    min-height: 100svh;
+  }
+
+  .background-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(13, 28, 21, 0.32) 0%,
+        rgba(21, 35, 28, 0.80) 44%,
+        rgba(21, 35, 28, 0.99) 72%
+      );
+  }
+
+  .auth-layout {
+    min-height: 100svh;
+
+    grid-template-columns: 1fr;
+
+    align-content: end;
+
+    gap: 28px;
+
+    padding:
+      30px
+      18px
+      24px;
+  }
+
+  .brand-area {
+    align-self: auto;
+
+    padding: 0;
+
+    max-width: 100%;
+  }
+
+  .brand-name {
+    font-size: 56px;
+
+    letter-spacing: -2px;
+  }
+
+  .brand-register {
+    margin-top: 15px;
+  }
+
+  .brand-copy-placeholder {
+    min-height: 36px;
+
+    font-size: 10px;
+  }
+
+  .auth-card {
+    padding: 27px 22px;
+
+    border-radius: 25px;
+  }
+
+  .brand-icon-placeholder {
+    width: 46px;
+    height: 46px;
+
+    margin-bottom: 22px;
+
+    border-radius: 14px;
+  }
+
+}
+
+
+/* =========================
+   CELULAR PEQUENO
+========================= */
+
+@media (max-width: 390px) {
+
+  .auth-layout {
+    padding:
+      22px
+      14px
+      18px;
+  }
+
+  .brand-name {
+    font-size: 48px;
+  }
+
+  .auth-card {
+    padding:
+      24px
+      18px;
+  }
+
+  .auth-header h1 {
+    font-size: 29px;
+  }
+
+}

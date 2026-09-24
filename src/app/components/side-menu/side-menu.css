@@ -1,0 +1,198 @@
+:host {
+  display: block;
+}
+
+.menu-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 3000;
+
+  background:
+    rgba(6, 16, 11, 0.58);
+
+  backdrop-filter:
+    blur(4px);
+
+  animation:
+    aparecer 0.2s ease;
+}
+
+.side-menu {
+  width: min(360px, 88vw);
+
+  min-height: 100vh;
+
+  padding: 28px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: #15231c;
+
+  box-shadow:
+    22px 0 70px
+    rgba(0, 0, 0, 0.32);
+
+  animation:
+    entrar 0.26s ease;
+}
+
+.menu-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: 28px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+}
+
+.menu-brand {
+  font-family:
+    'Fraunces',
+    serif;
+
+  font-size: 29px;
+
+  font-weight: 600;
+}
+
+.menu-brand span {
+  color: #B9A6CE;
+}
+
+.fechar {
+  width: 38px;
+  height: 38px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color: #f5f1e8;
+
+  font-size: 24px;
+}
+
+.menu-nav {
+  margin-top: 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.menu-nav button {
+  min-height: 52px;
+
+  padding:
+    0 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background: transparent;
+
+  color: #d9e0dc;
+
+  text-align: left;
+
+  font-size: 14px;
+
+  transition: 0.2s ease;
+}
+
+.menu-nav button:hover:not(:disabled) {
+  background:
+    rgba(170, 203, 218, 0.09);
+
+  color: #AACBDA;
+}
+
+.menu-nav button > span {
+  width: 22px;
+
+  color: #AACBDA;
+
+  font-size: 19px;
+
+  text-align: center;
+}
+
+.menu-nav .indisponivel {
+  opacity: 0.42;
+
+  cursor: default;
+}
+
+.menu-footer {
+  margin-top: auto;
+
+  padding-top: 24px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+}
+
+.sair {
+  width: 100%;
+
+  padding: 13px;
+
+  border:
+    1px solid
+    rgba(185, 166, 206, 0.28);
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: #B9A6CE;
+
+  font-weight: 600;
+}
+
+@keyframes entrar {
+
+  from {
+    transform:
+      translateX(-100%);
+  }
+
+  to {
+    transform:
+      translateX(0);
+  }
+
+}
+
+@keyframes aparecer {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}

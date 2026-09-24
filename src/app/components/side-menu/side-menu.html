@@ -1,0 +1,95 @@
+<div
+  class="menu-overlay"
+  (click)="fecharMenu()"
+>
+
+  <aside
+    class="side-menu"
+    (click)="$event.stopPropagation()"
+  >
+
+    <header class="menu-header">
+
+      <div class="menu-brand">
+        Ritmo<span>.</span>
+      </div>
+
+      <button
+        type="button"
+        class="fechar"
+        aria-label="Fechar menu"
+        (click)="fecharMenu()"
+      >
+        ×
+      </button>
+
+    </header>
+
+
+    <nav class="menu-nav">
+
+      <button
+        type="button"
+        (click)="irParaInicio()"
+      >
+        <span>⌂</span>
+        Início
+      </button>
+
+
+      <button
+        type="button"
+        (click)="irParaRitmo()"
+      >
+        <span>✦</span>
+        Meu Ritmo
+      </button>
+
+
+      <button
+        type="button"
+        class="indisponivel"
+        disabled
+      >
+        <span>◌</span>
+        Grupos
+      </button>
+
+
+      <button
+        type="button"
+        class="indisponivel"
+        disabled
+      >
+        <span>♡</span>
+        Favoritos
+      </button>
+
+
+      <button
+        type="button"
+        class="indisponivel"
+        disabled
+      >
+        <span>○</span>
+        Perfil
+      </button>
+
+    </nav>
+
+
+    <div class="menu-footer">
+
+      <button
+        type="button"
+        class="sair"
+        (click)="sair()"
+      >
+        Sair
+      </button>
+
+    </div>
+
+  </aside>
+
+</div>

@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --ritmo-blue: #AACBDA;
+  --ritmo-green: #7C8F63;
+  --ritmo-lilac: #B9A6CE;
+
+  --ritmo-dark: #15231c;
+  --ritmo-dark-soft: #1c2d24;
+
+  --ritmo-cream: #f5f1e8;
+  --ritmo-text-soft: #b8c3bc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  background: var(--ritmo-dark);
+  color: var(--ritmo-cream);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Fraunces', serif;
+}

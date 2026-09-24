@@ -1,0 +1,192 @@
+<div class="roteiro-page">
+
+  @if (roteiro) {
+
+    <header class="roteiro-header">
+
+      <button
+        type="button"
+        class="voltar"
+        (click)="voltar()"
+      >
+        ←
+      </button>
+
+      <div class="marca">
+        Ritmo<span>.</span>
+      </div>
+
+      <div></div>
+
+    </header>
+
+
+    <main class="roteiro-content">
+
+      <span class="etapa">
+        SEU RITMO DE HOJE
+      </span>
+
+      <h1>
+        {{ roteiro.nome }}
+      </h1>
+
+      <p class="descricao">
+        Veja como seu dia está organizado antes de começar.
+      </p>
+
+
+      <section class="resumo">
+
+        <div class="indicador">
+          <span>Duração</span>
+          <strong>
+            {{ roteiro.duracaoTotal }}h
+          </strong>
+        </div>
+
+        <div class="indicador">
+          <span>Distância</span>
+          <strong>
+            {{ roteiro.distanciaTotal }} km
+          </strong>
+        </div>
+
+        <div class="indicador">
+          <span>Custo</span>
+          <strong>
+            R$ {{ roteiro.custoTotal }}
+          </strong>
+        </div>
+
+        <div class="indicador">
+          <span>Intensidade</span>
+          <strong>
+            {{ roteiro.intensidade }}
+          </strong>
+        </div>
+
+      </section>
+
+
+      <section class="timeline">
+
+        <div class="timeline-header">
+
+          <span>
+            COMO SERÁ O DIA
+          </span>
+
+          <h2>
+            Seu caminho
+          </h2>
+
+        </div>
+
+
+        @for (
+          lugar of roteiro.lugares;
+          track lugar.id;
+          let indice = $index
+        ) {
+
+          <article class="parada">
+
+            <div class="numero">
+              {{ indice + 1 }}
+            </div>
+
+
+            <div class="parada-content">
+
+              <span class="categoria">
+                {{ lugar.categoria }}
+              </span>
+
+              <h3>
+                {{ lugar.nome }}
+              </h3>
+
+
+              <div class="dados">
+
+                <span>
+                  ⏱ {{ lugar.duracaoMedia }} min
+                </span>
+
+                <span>
+                  R$ {{ lugar.custoMedio }}
+                </span>
+
+                <span>
+                  Esforço: {{ lugar.nivelEsforco }}
+                </span>
+
+              </div>
+
+
+              <div class="caracteristicas">
+
+                @if (lugar.temDescanso) {
+                  <span>
+                    ✓ oportunidade de descanso
+                  </span>
+                }
+
+                @if (lugar.temEscadas) {
+                  <span>
+                    ↗ possui escadas
+                  </span>
+                }
+
+                @if (lugar.ambiente === 'interno') {
+                  <span>
+                    ◉ ambiente interno
+                  </span>
+                }
+
+                @if (lugar.ambiente === 'externo') {
+                  <span>
+                    ☀ ambiente externo
+                  </span>
+                }
+
+              </div>
+
+            </div>
+
+          </article>
+
+        }
+
+      </section>
+
+
+      <section class="inicio-dia">
+
+        <div>
+          <span>
+            TUDO CERTO?
+          </span>
+
+          <h2>
+            O plano está pronto.
+            Agora é hora de viver.
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          class="comecar"
+          (click)="comecarDia()"
+        >
+          Começar o dia →
+        </button>
+
+      </section>
+
+    </main>
+
+  }
+
+</div>

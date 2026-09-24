@@ -1,0 +1,224 @@
+<div class="contexto-page">
+
+    <header class="contexto-header">
+
+        <button class="voltar" type="button" (click)="voltar()">
+            ←
+        </button>
+
+        <div class="marca">
+            Ritmo<span>.</span>
+        </div>
+
+        <span class="contador">
+            {{ passoAtual() }}/4
+        </span>
+
+    </header>
+
+
+    <main class="contexto-content">
+
+        <div class="progresso">
+            <div class="progresso-preenchido" [style.width.%]="passoAtual() * 25"></div>
+        </div>
+
+
+        @if (passoAtual() === 1) {
+
+        <section class="pergunta">
+
+            <span class="etapa">
+                COMO VOCÊ ESTÁ?
+            </span>
+
+            <h1>
+                Qual é sua energia
+                <span>hoje?</span>
+            </h1>
+
+            <p>
+                Não precisa pensar na viagem inteira.
+                Só queremos entender como você está agora.
+            </p>
+
+
+            <div class="opcoes">
+
+                <button type="button" (click)="selecionarEnergia('baixa')">
+                    <strong>Tranquila</strong>
+                    <small>
+                        quero ir com calma
+                    </small>
+                </button>
+
+
+                <button type="button" (click)="selecionarEnergia('media')">
+                    <strong>Equilibrada</strong>
+                    <small>
+                        quero aproveitar sem exagerar
+                    </small>
+                </button>
+
+
+                <button type="button" (click)="selecionarEnergia('alta')">
+                    <strong>Alta</strong>
+                    <small>
+                        quero bastante movimento
+                    </small>
+                </button>
+
+            </div>
+
+        </section>
+
+        }
+
+
+        @if (passoAtual() === 2) {
+
+        <section class="pergunta">
+
+            <span class="etapa">
+                SEU TEMPO
+            </span>
+
+            <h1>
+                Quanto tempo você tem
+                <span>disponível?</span>
+            </h1>
+
+            <p>
+                Pode ser uma tarde livre na sua cidade
+                ou um dia durante uma viagem.
+            </p>
+
+
+            <div class="opcoes grade">
+
+                <button type="button" (click)="selecionarTempo(2)">
+                    <strong>2 horas</strong>
+                </button>
+
+                <button type="button" (click)="selecionarTempo(4)">
+                    <strong>4 horas</strong>
+                </button>
+
+                <button type="button" (click)="selecionarTempo(6)">
+                    <strong>6 horas</strong>
+                </button>
+
+                <button type="button" (click)="selecionarTempo(8)">
+                    <strong>Dia inteiro</strong>
+                </button>
+
+            </div>
+
+        </section>
+
+        }
+
+
+        @if (passoAtual() === 3) {
+
+        <section class="pergunta">
+
+            <span class="etapa">
+                SEU ORÇAMENTO
+            </span>
+
+            <h1>
+                Quanto você quer gastar
+                <span>hoje?</span>
+            </h1>
+
+            <p>
+                Usaremos isso apenas para evitar
+                sugestões incompatíveis com o seu momento.
+            </p>
+
+
+            <div class="opcoes grade">
+
+                <button type="button" (click)="selecionarOrcamento(50)">
+                    <strong>Até R$ 50</strong>
+                </button>
+
+                <button type="button" (click)="selecionarOrcamento(100)">
+                    <strong>Até R$ 100</strong>
+                </button>
+
+                <button type="button" (click)="selecionarOrcamento(200)">
+                    <strong>Até R$ 200</strong>
+                </button>
+
+                <button type="button" (click)="selecionarOrcamento(500)">
+                    <strong>Mais livre</strong>
+                </button>
+
+            </div>
+
+        </section>
+
+        }
+
+
+        @if (passoAtual() === 4) {
+
+        <section class="pergunta">
+
+            <span class="etapa">
+                COMPANHIA
+            </span>
+
+            <h1>
+                Quem vai viver esse
+                <span>Ritmo com você?</span>
+            </h1>
+
+            <p>
+                Isso ajuda o Ritmo a evitar opções
+                que funcionam bem para uma pessoa,
+                mas não para o grupo.
+            </p>
+
+
+            <div class="opcoes grade">
+
+  <button
+    type="button"
+    (click)="selecionarCompanhia('sozinho')"
+  >
+    <strong>Sozinho</strong>
+  </button>
+
+  <button
+    type="button"
+    (click)="selecionarCompanhia('casal')"
+  >
+    <strong>Casal</strong>
+  </button>
+
+  <button
+    type="button"
+    (click)="selecionarCompanhia('amigos')"
+  >
+    <strong>Amigos</strong>
+  </button>
+
+  <button
+    type="button"
+    (click)="selecionarCompanhia('familia')"
+  >
+    <strong>Família</strong>
+  </button>
+
+</div>
+
+        </section>
+
+        }
+
+    </main>
+
+</div>

@@ -1,0 +1,84 @@
+<div class="local-page">
+
+  <header class="local-header">
+
+    <button
+      type="button"
+      class="voltar"
+      aria-label="Voltar"
+      (click)="voltar()"
+    >
+      ←
+    </button>
+
+    <div class="marca">
+      Ritmo<span>.</span>
+    </div>
+
+    <div></div>
+
+  </header>
+
+
+  <main class="local-content">
+
+    <span class="etapa">
+      PRIMEIRO, O LUGAR
+    </span>
+
+    <h1>
+      Onde você quer viver
+      <span>seu Ritmo hoje?</span>
+    </h1>
+
+    <p>
+      Pode ser uma viagem, um passeio de fim de semana
+      ou só uma tarde livre perto de casa.
+    </p>
+
+
+    <div class="campo-local">
+
+      <label for="local">
+        Cidade ou região
+      </label>
+
+      <input
+        id="local"
+        type="text"
+        [formControl]="local"
+        placeholder="Ex.: Salvador, BA"
+        autocomplete="off"
+        (keyup.enter)="continuar()"
+      >
+
+    </div>
+
+
+    @if (erro()) {
+
+      <p class="mensagem-erro">
+        {{ erro() }}
+      </p>
+
+    }
+
+
+    <button
+      type="button"
+      class="continuar"
+      [disabled]="carregando()"
+      (click)="continuar()"
+    >
+
+      @if (carregando()) {
+        Buscando local...
+      } @else {
+        Continuar →
+      }
+
+    </button>
+
+  </main>
+
+</div>

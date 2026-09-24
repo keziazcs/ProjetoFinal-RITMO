@@ -1,0 +1,298 @@
+<div class="home-page">
+
+  <!-- HEADER -->
+  <header class="home-header">
+
+    <div class="header-left">
+
+      <button
+        type="button"
+        class="menu-button"
+        aria-label="Abrir menu"
+        (click)="abrirMenu()"
+      >
+        ☰
+      </button>
+
+      <div class="marca">
+        Ritmo<span>.</span>
+      </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+      <button
+        type="button"
+        class="localizacao"
+      >
+        <span>⌖</span>
+        Salvador
+      </button>
+
+      <button
+        type="button"
+        class="perfil"
+        aria-label="Perfil"
+      >
+        K
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- PAINEL VISUAL -->
+  <section class="hero">
+
+    <div class="hero-carousel">
+
+      <div
+        class="hero-slide"
+        [class.active]="slideAtual === 0"
+        style="
+          background-image:
+          url('/images/ritmo-1.jpg')
+        "
+      >
+      </div>
+
+      <div
+        class="hero-slide"
+        [class.active]="slideAtual === 1"
+        style="
+          background-image:
+          url('/images/ritmo-2.jpg')
+        "
+      >
+      </div>
+
+      <div
+        class="hero-slide"
+        [class.active]="slideAtual === 2"
+        style="
+          background-image:
+          url('/images/ritmo-3.jpg')
+        "
+      >
+      </div>
+
+    </div>
+
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-content">
+
+      <span class="hero-label">
+        SEU DIA, DO SEU JEITO
+      </span>
+
+      <div class="hero-bottom">
+
+        <div>
+
+          <h1>
+            Como você quer
+            <span>viver o dia?</span>
+          </h1>
+
+          <p>
+            Tempo, energia, companhia e
+            orçamento mudam. Seu roteiro
+            também pode mudar.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="ritmo-button"
+          (click)="irParaRitmo()"
+        >
+          Encontrar meu Ritmo
+          <span></span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PARA VOCÊ -->
+  <section class="para-voce">
+
+    <header class="section-header">
+
+      <div>
+
+        <span class="section-label">
+          PARA VOCÊ
+        </span>
+
+        <h2>
+          Experiências que têm
+          a sua cara
+        </h2>
+
+      </div>
+
+    </header>
+
+
+    <div class="cards">
+
+      @for (
+        roteiro of destaques;
+        track roteiro.id
+      ) {
+
+        <article
+          class="experience-card"
+          (click)="abrirRoteiro(roteiro.id)"
+        >
+
+          <div class="card-visual">
+
+            <span class="intensidade">
+              {{ roteiro.intensidade }}
+            </span>
+
+            <button
+              type="button"
+              class="favoritar"
+              aria-label="Favoritar"
+              (click)="
+                $event.stopPropagation()
+              "
+            >
+              ♡
+            </button>
+
+          </div>
+
+
+          <div class="card-body">
+
+            <h3>
+              {{ roteiro.nome }}
+            </h3>
+
+            <div class="card-info">
+
+              <span>
+                {{ roteiro.duracaoTotal }}h
+              </span>
+
+              <span>
+                {{ roteiro.distanciaTotal }} km
+              </span>
+
+              <span>
+                R$ {{ roteiro.custoTotal }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <app-bottom-nav></app-bottom-nav>
+
+
+ @if (menuAberto) {
+
+  <div
+    class="menu-overlay"
+    (click)="fecharMenu()"
+  >
+
+    <aside
+      class="side-menu"
+      (click)="$event.stopPropagation()"
+    >
+
+      <header class="menu-header">
+
+        <div class="menu-brand">
+          Ritmo<span>.</span>
+        </div>
+
+        <button
+          type="button"
+          class="fechar-menu"
+          (click)="fecharMenu()"
+        >
+          ×
+        </button>
+
+      </header>
+
+      <nav class="menu-nav">
+
+        <button
+          type="button"
+          (click)="fecharMenu()"
+        >
+          Início
+        </button>
+
+        <button
+          type="button"
+          (click)="irParaRitmo()"
+        >
+          Meu Ritmo
+        </button>
+
+        <button
+          type="button"
+          disabled
+        >
+          Grupos
+        </button>
+
+        <button
+          type="button"
+          disabled
+        >
+          Favoritos
+        </button>
+
+        <button
+          type="button"
+          disabled
+        >
+          Perfil
+        </button>
+
+      </nav>
+
+      <button
+        type="button"
+        class="sair"
+        (click)="sair()"
+      >
+        Sair
+      </button>
+
+    </aside>
+
+  </div>
+
+}
+
+</div>

@@ -1,0 +1,119 @@
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.globo-section {
+  width: 100%;
+
+  min-height: 500px;
+
+  padding:
+    40px;
+
+  display: grid;
+
+  grid-template-columns:
+    0.9fr
+    1.1fr;
+
+  align-items: center;
+
+  gap: 30px;
+
+  overflow: hidden;
+
+  border-radius: 30px;
+
+  background: #0A1C12;
+}
+
+.globo-copy h2 {
+  margin:
+    10px
+    0
+    16px;
+
+  color: #F7F4ED;
+
+  font-size:
+    clamp(34px, 4vw, 50px);
+
+  font-weight: 900;
+
+  line-height: 1;
+}
+
+.globo-copy h2 span {
+  display: block;
+
+  color: #91CDFF;
+}
+
+.globo-copy p {
+  max-width: 420px;
+
+  color: #AEB9B2;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+.eyebrow {
+  color: #91CDFF;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.7px;
+}
+
+.globo-container {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.globe {
+  width: 520px;
+  height: 520px;
+
+  max-width: 100%;
+
+  display: block;
+}
+
+@media (max-width: 800px) {
+
+  .globo-section {
+    grid-template-columns: 1fr;
+
+    padding:
+      28px
+      22px;
+  }
+
+  .globo-copy {
+    text-align: center;
+  }
+
+  .globo-copy p {
+    margin:
+      0
+      auto;
+  }
+
+  .globe {
+    width: 360px;
+    height: 360px;
+  }
+
+}

@@ -1,0 +1,570 @@
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.perfil-page {
+  min-height: 100vh;
+
+  padding:
+    30px
+    clamp(16px, 5vw, 50px)
+    110px;
+
+  background:
+    var(
+      --ritmo-background,
+      #0F261A
+    );
+
+  color:
+    var(
+      --ritmo-text,
+      #F7F4ED
+    );
+
+  font-family:
+    'Nunito',
+    sans-serif;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* HEADER */
+
+.perfil-header {
+  width: min(760px, 100%);
+
+  margin:
+    0
+    auto
+    32px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+
+.avatar {
+  width: 72px;
+  height: 72px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #236B45;
+
+  color: #F7F4ED;
+
+  font-size: 25px;
+
+  font-weight: 900;
+}
+
+
+.perfil-identidade h1 {
+  margin:
+    5px
+    0
+    3px;
+
+  font-size:
+    clamp(30px, 5vw, 42px);
+
+  font-weight: 900;
+
+  line-height: 1;
+}
+
+
+.perfil-identidade p {
+  margin: 0;
+
+  color:
+    var(
+      --ritmo-muted,
+      #AEB9B2
+    );
+
+  font-size: 12px;
+}
+
+
+.eyebrow {
+  display: block;
+
+  color: #609fd3;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.7px;
+}
+
+
+/* CARD PRINCIPAL */
+
+.profile-card {
+  width: min(760px, 100%);
+
+  margin:
+    0
+    auto
+    42px;
+
+  padding: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  border:
+    1px solid
+    var(
+      --ritmo-border,
+      rgba(255, 255, 255, 0.08)
+    );
+
+  border-radius: 22px;
+
+  background:
+    var(
+      --ritmo-surface,
+      #173E2B
+    );
+}
+
+
+.info-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color:
+    var(
+      --ritmo-muted,
+      #AEB9B2
+    );
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+.profile-info strong {
+  font-size: 16px;
+}
+
+
+.secondary-button {
+  min-height: 42px;
+
+  padding:
+    0
+    16px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: #91CDFF;
+
+  color: #173E2B;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+/* SEÇÕES */
+
+.perfil-section {
+  width: min(760px, 100%);
+
+  margin:
+    0
+    auto
+    40px;
+}
+
+
+.section-header {
+  margin-bottom: 16px;
+}
+
+
+.section-header h2 {
+  margin:
+    6px
+    0
+    4px;
+
+  font-size: 25px;
+
+  font-weight: 900;
+}
+
+
+.section-header p {
+  margin: 0;
+
+  color:
+    var(
+      --ritmo-muted,
+      #AEB9B2
+    );
+
+  font-size: 11px;
+}
+
+
+/* MEU RITMO */
+
+.option-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+.option-card {
+  min-height: 105px;
+
+  padding: 17px;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    1fr
+    auto;
+
+  align-items: center;
+
+  gap: 12px;
+
+  border:
+    1px solid
+    var(
+      --ritmo-border,
+      rgba(255, 255, 255, 0.07)
+    );
+
+  border-radius: 19px;
+
+  background:
+    var(
+      --ritmo-surface,
+      #173E2B
+    );
+
+  color:
+    var(
+      --ritmo-text,
+      #F7F4ED
+    );
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+
+.option-icon {
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background:
+    rgba(145, 205, 255, 0.10);
+
+  color: #609fd3;
+
+  font-size: 17px;
+}
+
+
+.option-card strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 13px;
+}
+
+
+.option-card p {
+  margin: 0;
+
+  color:
+    var(
+      --ritmo-muted,
+      #AEB9B2
+    );
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+.arrow {
+  color: #609fd3;
+}
+
+
+/* TEMA */
+
+.theme-selector {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+
+.theme-option {
+  min-height: 88px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border:
+    1px solid
+    var(
+      --ritmo-border,
+      rgba(255, 255, 255, 0.08)
+    );
+
+  border-radius: 18px;
+
+  background:
+    var(
+      --ritmo-surface,
+      #173E2B
+    );
+
+  color:
+    var(
+      --ritmo-muted,
+      #AEB9B2
+    );
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    border 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.theme-option:hover {
+  transform:
+    translateY(-2px);
+}
+
+
+.theme-option.active {
+  border-color: #609fd3;
+
+  background:
+    rgba(145, 205, 255, 0.10);
+
+  color:
+    var(
+      --ritmo-text,
+      #F7F4ED
+    );
+}
+
+
+.theme-icon {
+  font-size: 22px;
+}
+
+
+/* CONFIGURAÇÕES */
+
+.settings-list {
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --ritmo-border,
+      rgba(255, 255, 255, 0.07)
+    );
+
+  border-radius: 19px;
+
+  background:
+    var(
+      --ritmo-surface,
+      #173E2B
+    );
+}
+
+
+.settings-item {
+  width: 100%;
+
+  min-height: 55px;
+
+  padding:
+    0
+    17px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  border: none;
+
+  border-bottom:
+    1px solid
+    var(
+      --ritmo-border,
+      rgba(255, 255, 255, 0.07)
+    );
+
+  background: transparent;
+
+  color:
+    var(
+      --ritmo-text,
+      #F7F4ED
+    );
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+
+/* SAIR */
+
+.logout-button {
+  width: min(760px, 100%);
+
+  min-height: 48px;
+
+  margin:
+    0
+    auto;
+
+  display: block;
+
+  border:
+    1px solid
+    rgba(255, 110, 110, 0.25);
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: #DF8F8F;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .perfil-page {
+    padding:
+      22px
+      14px
+      100px;
+  }
+
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+
+    font-size: 21px;
+  }
+
+
+  .profile-card {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .secondary-button {
+    width: 100%;
+  }
+
+
+  .option-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .theme-option {
+    min-height: 78px;
+  }
+
+}

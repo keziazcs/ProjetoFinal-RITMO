@@ -4,11 +4,7 @@ import {
   signal
 } from '@angular/core';
 
-import {
-  FormControl,
-  ReactiveFormsModule
-} from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import {
@@ -19,72 +15,65 @@ import {
   LocalSelecionadoService
 } from '../../services/local-selecionado.service';
 
-import {
-  ContextoDoDiaService
-} from '../../services/contexto-do-dia';
-
 
 @Component({
   selector: 'app-local',
+
   imports: [
-    ReactiveFormsModule
+    FormsModule
   ],
+
   templateUrl: './local.html',
   styleUrl: './local.css'
 })
 export class Local {
 
+  private readonly router =
+    inject(Router);
+
   private readonly localService =
     inject(LocalService);
-
-  private readonly contextoService =
-  inject(ContextoDoDiaService);  
 
   private readonly localSelecionadoService =
     inject(LocalSelecionadoService);
 
-  private readonly router =
-    inject(Router);
 
-
-  protected readonly local =
-    new FormControl('', {
-      nonNullable: true
-    });
-
+  protected local = '';
 
   protected readonly carregando =
     signal(false);
 
   protected readonly erro =
-    signal<string | null>(null);
+    signal('');
 
 
-  protected async continuar(): Promise<void> {
+  protected async continuar():
+    Promise<void> {
 
     const texto =
-      this.local.value.trim();
+      this.local.trim();
+
 
     if (!texto) {
 
       this.erro.set(
-        'Digite uma cidade ou local para continuar.'
+        'Digite uma cidade ou destino para continuar.'
       );
 
       return;
     }
 
 
+    this.erro.set('');
+
     this.carregando.set(true);
-    this.erro.set(null);
 
 
     try {
 
       const resultado =
-        await this.localService.buscarLocal(
-          texto
-        );
+        await this.localService
+          .buscarLocal(texto);
 
 
       if (!resultado) {
@@ -97,22 +86,16 @@ export class Local {
       }
 
 
-      this.localSelecionadoService.salvar(
-  texto,
-  resultado
-);
-
-this.contextoService.limparContexto();
-
-await this.router.navigate([
-  '/contexto-do-dia'
-]);
+      this.localSelecionadoService
+        .salvar(
+          texto,
+          resultado
+        );
 
 
       await this.router.navigate([
         '/contexto-do-dia'
       ]);
-
 
     } catch (erro) {
 
@@ -121,10 +104,10 @@ await this.router.navigate([
         erro
       );
 
-      this.erro.set(
-        'Não foi possível buscar o local agora. Tente novamente.'
-      );
 
+      this.erro.set(
+        'Não foi possível buscar esse local agora.'
+      );
 
     } finally {
 
@@ -135,7 +118,7 @@ await this.router.navigate([
   }
 
 
-  protected voltar(): void {
+  protected voltarHome(): void {
 
     this.router.navigate([
       '/home'

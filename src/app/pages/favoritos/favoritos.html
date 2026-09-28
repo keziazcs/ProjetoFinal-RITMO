@@ -1,0 +1,180 @@
+<div class="favoritos-page">
+
+  <header class="app-top">
+
+    <button
+      type="button"
+      class="back-button"
+      aria-label="Voltar para início"
+      (click)="voltarHome()"
+    >
+      ←
+    </button>
+
+    <img
+      src="/images/logo-ritmo.png"
+      alt="Ritmo"
+      class="page-logo"
+    >
+
+    <span class="top-status">
+      FAVORITOS
+    </span>
+
+  </header>
+
+
+  <main class="favoritos-content">
+
+    <section class="intro">
+
+      <span class="eyebrow">
+        GUARDADOS PARA DEPOIS
+      </span>
+
+      <h1>
+        Seus lugares.
+        <span>Seus próximos Ritmos.</span>
+      </h1>
+
+      <p>
+        Tudo que chamou sua atenção
+        fica reunido aqui para você
+        reencontrar quando quiser.
+      </p>
+
+    </section>
+
+
+    @if (favoritos.length > 0) {
+
+      <section class="favoritos-grid">
+
+        @for (
+          roteiro of favoritos;
+          track roteiro.id
+        ) {
+
+          <article
+            class="favorito-card"
+            (click)="abrirRoteiro(roteiro.id)"
+          >
+
+            <div
+              class="card-image"
+              [style.background-image]="
+                'linear-gradient(
+                  180deg,
+                  rgba(7, 24, 15, 0.04),
+                  rgba(7, 24, 15, 0.72)
+                ),
+                url(' +
+                imagemRoteiro(roteiro.nome) +
+                ')'
+              "
+            >
+
+              <span class="intensidade">
+                {{ roteiro.intensidade }}
+              </span>
+
+              <button
+                type="button"
+                class="remove-button"
+                aria-label="Remover favorito"
+                (click)="removerFavorito(
+                  roteiro.id,
+                  $event
+                )"
+              >
+                ♥
+              </button>
+
+            </div>
+
+
+            <div class="card-content">
+
+              <span class="card-label">
+                SALVADOR
+              </span>
+
+              <h2>
+                {{ roteiro.nome }}
+              </h2>
+
+              <div class="card-meta">
+
+                <span>
+                  ◷ {{ roteiro.duracaoTotal }}h
+                </span>
+
+                <span>
+                  ↝ {{ roteiro.distanciaTotal }} km
+                </span>
+
+                <span>
+                  R$ {{ roteiro.custoTotal }}
+                </span>
+
+              </div>
+
+              <button
+                type="button"
+                class="open-button"
+              >
+                Ver experiência
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </article>
+
+        }
+
+      </section>
+
+    } @else {
+
+      <section class="empty-state">
+
+        <div class="empty-heart">
+          ♡
+        </div>
+
+        <span class="eyebrow">
+          AINDA VAZIO
+        </span>
+
+        <h2>
+          Seu próximo favorito
+          pode estar a um scroll daqui.
+        </h2>
+
+        <p>
+          Explore experiências e toque
+          no coração para guardar o que
+          combina com você.
+        </p>
+
+        <button
+          type="button"
+          class="explore-button"
+          (click)="explorar()"
+        >
+          Explorar Ritmos
+          <span>→</span>
+        </button>
+
+      </section>
+
+    }
+
+  </main>
+
+
+  <app-bottom-nav>
+  </app-bottom-nav>
+
+</div>

@@ -1,49 +1,193 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+<div class="roteiros-page">
 
-import { RitmoService } from '../../services/ritmo';
-import { ContextoDoDiaService } from '../../services/contexto-do-dia';
+  <header class="app-top">
 
-import { ROTEIROS } from '../../data/roteiros';
-import { Roteiro } from '../../models/roteiro';
+    <button
+      type="button"
+      class="back-button"
+      aria-label="Voltar para início"
+      (click)="voltarHome()"
+    >
+      ←
+    </button>
 
-@Component({
-  selector: 'app-roteiros',
-  imports: [],
-  templateUrl: './roteiros.html',
-  styleUrl: './roteiros.css'
-})
-export class Roteiros {
+    <img
+      src="/images/logo-ritmo.png"
+      alt="Ritmo"
+      class="page-logo"
+    >
 
-  private readonly ritmoService = inject(RitmoService);
-  private readonly contextoService = inject(ContextoDoDiaService);
-  private readonly router = inject(Router);
+    <span class="top-status">
+      SEU RITMO
+    </span>
 
-  roteirosCompativeis: Roteiro[] = [];
+  </header>
 
-  constructor() {
 
-    const contexto =
-      this.contextoService.obterContexto();
+  <section class="roteiros-header">
 
-    if (!contexto) {
-      this.router.navigate(['/contexto-do-dia']);
-      return;
-    }
+    <span class="eyebrow">
+      FEITO PARA O SEU DIA
+    </span>
 
-    this.roteirosCompativeis =
-      this.ritmoService.buscarCompativeis(
-        ROTEIROS,
-        contexto
-      );
+    <h1>
+      Encontramos experiências
+      <span>no seu ritmo.</span>
+    </h1>
+
+    <p>
+      Tempo, energia, companhia e orçamento
+      foram considerados para chegar até aqui.
+    </p>
+
+  </section>
+
+
+  <div class="header-actions">
+
+    <button
+      type="button"
+      class="ajustar-button"
+      (click)="ajustarContexto()"
+    >
+      ↺ Ajustar contexto
+    </button>
+
+  </div>
+
+
+  @if (roteirosCompativeis.length > 0) {
+
+    <main class="roteiros-grid">
+
+      @for (
+        roteiro of roteirosCompativeis;
+        track roteiro.id
+      ) {
+
+        <article
+          class="roteiro-card"
+          (click)="abrirRoteiro(
+            roteiro.id
+          )"
+        >
+
+          <div class="card-glow"></div>
+
+
+          <div class="card-top">
+
+            <span class="intensidade">
+              {{ roteiro.intensidade }}
+            </span>
+
+            <span class="arrow">
+              ↗
+            </span>
+
+          </div>
+
+
+          <div class="card-content">
+
+            <span class="card-label">
+              EXPERIÊNCIA RITMO
+            </span>
+
+            <h2>
+              {{ roteiro.nome }}
+            </h2>
+
+
+            <div class="dados">
+
+              <div class="dado">
+
+                <span>
+                  DURAÇÃO
+                </span>
+
+                <strong>
+                  {{ roteiro.duracaoTotal }}h
+                </strong>
+
+              </div>
+
+
+              <div class="dado">
+
+                <span>
+                  DISTÂNCIA
+                </span>
+
+                <strong>
+                  {{ roteiro.distanciaTotal }} km
+                </strong>
+
+              </div>
+
+
+              <div class="dado">
+
+                <span>
+                  ESTIMATIVA
+                </span>
+
+                <strong>
+                  R$ {{ roteiro.custoTotal }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="abrir-button"
+            >
+              Ver experiência
+
+              <span>
+                →
+              </span>
+            </button>
+
+          </div>
+
+        </article>
+
+      }
+
+    </main>
+
+  } @else {
+
+    <section class="empty-state">
+
+      <span class="empty-symbol">
+        ✦
+      </span>
+
+      <h2>
+        Seu dia pede outro ritmo.
+      </h2>
+
+      <p>
+        Não encontramos uma combinação
+        ideal com esse contexto. Ajuste
+        algumas escolhas e tente novamente.
+      </p>
+
+      <button
+        type="button"
+        (click)="ajustarContexto()"
+      >
+        Ajustar meu Ritmo
+      </button>
+
+    </section>
+
   }
 
-  abrirRoteiro(id: number | string): void {
-    this.router.navigate(['/roteiro', id]);
-  }
-
-  ajustarContexto(): void {
-    this.router.navigate(['/contexto-do-dia']);
-  }
-
-}
+</div>

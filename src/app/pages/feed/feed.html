@@ -1,0 +1,265 @@
+<div class="feed-page">
+
+  <header class="feed-header">
+
+    <span class="eyebrow">
+      EXPLORAR
+    </span>
+
+    <h1>
+      Descubra novos Ritmos
+    </h1>
+
+    <p>
+      Experiências e lugares para viver
+      cada destino do seu jeito.
+    </p>
+
+  </header>
+
+
+  <!-- ROTEIROS -->
+  <section class="roteiros-section">
+
+    <header class="section-header">
+
+      <div>
+
+        <span class="eyebrow">
+          PARA VOCÊ
+        </span>
+
+        <h2>
+          Experiências no seu ritmo
+        </h2>
+
+      </div>
+
+    </header>
+
+
+    <div class="feed-list">
+
+      @for (
+        roteiro of roteiros;
+        track roteiro.id
+      ) {
+
+        <article
+          class="feed-card"
+          (click)="abrirRoteiro(
+            roteiro.id
+          )"
+        >
+
+          <div
+            class="card-visual"
+            [style.background-image]="
+              backgroundRoteiro(
+                roteiro.nome
+              )
+            "
+          >
+
+            <span class="intensidade">
+              {{ roteiro.intensidade }}
+            </span>
+
+
+            <button
+              type="button"
+              class="favorite-button"
+              [class.active]="
+                estaFavoritado(
+                  roteiro.id
+                )
+              "
+              (click)="favoritar(
+                roteiro.id,
+                $event
+              )"
+            >
+
+              @if (
+                estaFavoritado(
+                  roteiro.id
+                )
+              ) {
+                ♥
+              } @else {
+                ♡
+              }
+
+            </button>
+
+          </div>
+
+
+          <div class="card-content">
+
+            <span class="card-city">
+              Salvador
+            </span>
+
+            <h2>
+              {{ roteiro.nome }}
+            </h2>
+
+
+            <div class="card-meta">
+
+              <span>
+                {{ roteiro.duracaoTotal }}h
+              </span>
+
+              <span>
+                {{ roteiro.distanciaTotal }} km
+              </span>
+
+              <span>
+                R$ {{ roteiro.custoTotal }}
+              </span>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="open-button"
+            >
+              Ver experiência
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </article>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- GEOAPIFY -->
+  <section class="lugares-reais">
+
+    <header class="real-header">
+
+      <div>
+
+        <span class="eyebrow">
+          PERTO DE VOCÊ
+        </span>
+
+        @if (cidadeAtual) {
+
+          <h2>
+            Lugares reais em
+            <span>
+              {{ cidadeAtual }}
+            </span>
+          </h2>
+
+        } @else {
+
+          <h2>
+            Explore lugares reais
+          </h2>
+
+        }
+
+      </div>
+
+
+      <button
+        type="button"
+        class="change-city"
+        (click)="escolherCidade()"
+      >
+        Trocar cidade
+      </button>
+
+    </header>
+
+
+    @if (carregandoLugares) {
+
+      <div class="status-box">
+        Buscando lugares próximos...
+      </div>
+
+    } @else if (lugaresReais.length > 0) {
+
+      <div class="real-scroll">
+
+        @for (
+          lugar of lugaresReais;
+          track lugar.id
+        ) {
+
+          <article class="real-card">
+
+            <span class="real-category">
+              {{
+                formatarCategoria(
+                  lugar.categoria
+                )
+              }}
+            </span>
+
+            <h3>
+              {{ lugar.nome }}
+            </h3>
+
+            @if (lugar.endereco) {
+
+              <p>
+                {{ lugar.endereco }}
+              </p>
+
+            }
+
+            @if (
+              lugar.distanciaMetros !== null
+            ) {
+
+              <span class="distance">
+                {{ lugar.distanciaMetros }} m
+              </span>
+
+            }
+
+          </article>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <div class="status-box">
+
+        <p>
+          {{ erroLugares }}
+        </p>
+
+        <button
+          type="button"
+          (click)="escolherCidade()"
+        >
+          Escolher cidade
+        </button>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <app-bottom-nav>
+  </app-bottom-nav>
+
+</div>

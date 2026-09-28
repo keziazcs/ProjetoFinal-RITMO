@@ -1,22 +1,25 @@
 <div class="home-page">
 
   <!-- HEADER -->
-  <header class="home-header">
+  <header class="app-header">
 
     <div class="header-left">
 
       <button
         type="button"
-        class="menu-button"
+        class="icon-button"
         aria-label="Abrir menu"
         (click)="abrirMenu()"
       >
         ☰
       </button>
 
-      <div class="marca">
-        Ritmo<span>.</span>
-      </div>
+
+      <img
+        class="header-logo"
+        src="/images/logo-ritmo.png"
+        alt="Ritmo"
+      >
 
     </div>
 
@@ -25,18 +28,21 @@
 
       <button
         type="button"
-        class="localizacao"
+        class="location-button"
+        (click)="navegar('/local')"
       >
         <span>⌖</span>
-        Salvador
+        {{ cidadeAtual }}
       </button>
+
 
       <button
         type="button"
-        class="perfil"
-        aria-label="Perfil"
+        class="avatar-button"
+        aria-label="Abrir perfil"
+        (click)="navegar('/perfil')"
       >
-        K
+        {{ inicialUsuario }}
       </button>
 
     </div>
@@ -44,81 +50,128 @@
   </header>
 
 
-  <!-- PAINEL VISUAL -->
-  <section class="hero">
+  <!-- BOAS-VINDAS -->
+  <section class="welcome-section">
 
-    <div class="hero-carousel">
+    <span class="eyebrow">
+      SEU RITMO DE HOJE
+    </span>
 
-      <div
-        class="hero-slide"
-        [class.active]="slideAtual === 0"
-        style="
-          background-image:
-          url('/images/ritmo-1.jpg')
-        "
+    <h1>
+      Olá, {{ nomeUsuario }}.
+    </h1>
+
+    <p>
+      Como você quer viver o dia?
+    </p>
+
+  </section>
+
+
+  <!-- AÇÃO PRINCIPAL -->
+  <section class="daily-card">
+
+    <div class="daily-copy">
+
+      <span class="daily-label">
+        MONTE O SEU DIA
+      </span>
+
+      <h2>
+        Seu tempo muda.
+        <span>
+          Seu roteiro também.
+        </span>
+      </h2>
+
+      <p>
+        Conte como está sua energia,
+        quanto tempo você tem e como
+        quer aproveitar o dia.
+      </p>
+
+
+      <button
+        type="button"
+        class="primary-action"
+        (click)="irParaRitmo()"
       >
-      </div>
-
-      <div
-        class="hero-slide"
-        [class.active]="slideAtual === 1"
-        style="
-          background-image:
-          url('/images/ritmo-2.jpg')
-        "
-      >
-      </div>
-
-      <div
-        class="hero-slide"
-        [class.active]="slideAtual === 2"
-        style="
-          background-image:
-          url('/images/ritmo-3.jpg')
-        "
-      >
-      </div>
+        Encontrar meu Ritmo
+        <span>→</span>
+      </button>
 
     </div>
 
 
-    <div class="hero-overlay"></div>
+    <div class="daily-decoration">
 
+      <span
+        class="route-point point-one"
+      ></span>
 
-    <div class="hero-content">
+      <span class="route-line"></span>
 
-      <span class="hero-label">
-        SEU DIA, DO SEU JEITO
+      <span
+        class="route-point point-two"
+      ></span>
+
+      <span class="route-person">
+        ●
       </span>
 
-      <div class="hero-bottom">
+    </div>
 
-        <div>
-
-          <h1>
-            Como você quer
-            <span>viver o dia?</span>
-          </h1>
-
-          <p>
-            Tempo, energia, companhia e
-            orçamento mudam. Seu roteiro
-            também pode mudar.
-          </p>
-
-        </div>
+  </section>
 
 
-        <button
-          type="button"
-          class="ritmo-button"
-          (click)="irParaRitmo()"
-        >
-          Encontrar meu Ritmo
-          <span></span>
-        </button>
+  <!-- SEU DIA -->
+  <section class="app-section">
+
+    <header class="section-header">
+
+      <div>
+
+        <span class="section-label">
+          SEU DIA
+        </span>
+
+        <h2>
+          Continue de onde parou
+        </h2>
 
       </div>
+
+    </header>
+
+
+    <div class="current-card">
+
+      <div class="current-icon">
+        ✦
+      </div>
+
+
+      <div class="current-content">
+
+        <strong>
+          Nenhum Ritmo ativo
+        </strong>
+
+        <p>
+          Quando você iniciar um roteiro,
+          o progresso do dia aparece aqui.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="small-action"
+        (click)="irParaRitmo()"
+      >
+        Começar
+      </button>
 
     </div>
 
@@ -126,7 +179,7 @@
 
 
   <!-- PARA VOCÊ -->
-  <section class="para-voce">
+  <section class="app-section">
 
     <header class="section-header">
 
@@ -137,16 +190,24 @@
         </span>
 
         <h2>
-          Experiências que têm
-          a sua cara
+          Experiências no seu ritmo
         </h2>
 
       </div>
 
+
+      <button
+        type="button"
+        class="text-button"
+        (click)="abrirFeed()"
+      >
+        Ver mais
+      </button>
+
     </header>
 
 
-    <div class="cards">
+    <div class="experience-list">
 
       @for (
         roteiro of destaques;
@@ -155,24 +216,50 @@
 
         <article
           class="experience-card"
-          (click)="abrirRoteiro(roteiro.id)"
+          (click)="abrirRoteiro(
+            roteiro.id
+          )"
         >
 
-          <div class="card-visual">
+          <div
+            class="card-image"
+            [style.background-image]="
+              backgroundRoteiro(
+                roteiro.nome
+              )
+            "
+          >
 
             <span class="intensidade">
               {{ roteiro.intensidade }}
             </span>
 
+
             <button
               type="button"
-              class="favoritar"
-              aria-label="Favoritar"
-              (click)="
-                $event.stopPropagation()
+              class="favorite-button"
+              [class.active]="
+                estaFavoritado(
+                  roteiro.id
+                )
               "
+              aria-label="Favoritar"
+              (click)="favoritar(
+                roteiro.id,
+                $event
+              )"
             >
-              ♡
+
+              @if (
+                estaFavoritado(
+                  roteiro.id
+                )
+              ) {
+                ♥
+              } @else {
+                ♡
+              }
+
             </button>
 
           </div>
@@ -184,7 +271,8 @@
               {{ roteiro.nome }}
             </h3>
 
-            <div class="card-info">
+
+            <div class="card-meta">
 
               <span>
                 {{ roteiro.duracaoTotal }}h
@@ -211,88 +299,53 @@
   </section>
 
 
-  <app-bottom-nav></app-bottom-nav>
+  <!-- HISTÓRIA -->
+  <section class="app-section history-callout">
+
+    <div>
+
+      <span class="section-label">
+        EXPLORE
+      </span>
+
+      <h2>
+        Mais lugares.
+        <span>Mais formas de viver.</span>
+      </h2>
+
+      <p>
+        Veja experiências e lugares reais
+        próximos da cidade que você escolheu.
+      </p>
+
+    </div>
 
 
- @if (menuAberto) {
-
-  <div
-    class="menu-overlay"
-    (click)="fecharMenu()"
-  >
-
-    <aside
-      class="side-menu"
-      (click)="$event.stopPropagation()"
+    <button
+      type="button"
+      class="primary-action"
+      (click)="abrirFeed()"
     >
+      Explorar
+      <span>→</span>
+    </button>
 
-      <header class="menu-header">
+  </section>
 
-        <div class="menu-brand">
-          Ritmo<span>.</span>
-        </div>
 
-        <button
-          type="button"
-          class="fechar-menu"
-          (click)="fecharMenu()"
-        >
-          ×
-        </button>
+  <!-- BOTTOM NAV -->
+  <app-bottom-nav>
+  </app-bottom-nav>
 
-      </header>
 
-      <nav class="menu-nav">
+  <!-- MENU -->
+  @if (menuAberto) {
 
-        <button
-          type="button"
-          (click)="fecharMenu()"
-        >
-          Início
-        </button>
+    <app-side-menu
+      (menuFechado)="fecharMenu()"
+    >
+    </app-side-menu>
 
-        <button
-          type="button"
-          (click)="irParaRitmo()"
-        >
-          Meu Ritmo
-        </button>
-
-        <button
-          type="button"
-          disabled
-        >
-          Grupos
-        </button>
-
-        <button
-          type="button"
-          disabled
-        >
-          Favoritos
-        </button>
-
-        <button
-          type="button"
-          disabled
-        >
-          Perfil
-        </button>
-
-      </nav>
-
-      <button
-        type="button"
-        class="sair"
-        (click)="sair()"
-      >
-        Sair
-      </button>
-
-    </aside>
-
-  </div>
-
-}
+  }
 
 </div>

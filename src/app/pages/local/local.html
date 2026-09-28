@@ -1,83 +1,209 @@
 <div class="local-page">
 
-  <header class="local-header">
+  <!-- CABEÇALHO -->
+  <header class="app-top">
 
     <button
       type="button"
-      class="voltar"
-      aria-label="Voltar"
-      (click)="voltar()"
+      class="back-button"
+      aria-label="Voltar para início"
+      (click)="voltarHome()"
     >
       ←
     </button>
 
-    <div class="marca">
-      Ritmo<span>.</span>
-    </div>
 
-    <div></div>
+    <img
+      src="/images/logo-ritmo.png"
+      alt="Ritmo"
+      class="page-logo"
+    >
+
+
+    <span class="top-status">
+      LOCAL
+    </span>
 
   </header>
 
 
   <main class="local-content">
 
-    <span class="etapa">
-      PRIMEIRO, O LUGAR
-    </span>
+    <!-- HERO -->
+    <section class="intro">
 
-    <h1>
-      Onde você quer viver
-      <span>seu Ritmo hoje?</span>
-    </h1>
-
-    <p>
-      Pode ser uma viagem, um passeio de fim de semana
-      ou só uma tarde livre perto de casa.
-    </p>
+      <div class="location-symbol">
+        ⌖
+      </div>
 
 
-    <div class="campo-local">
-
-      <label for="local">
-        Cidade ou região
-      </label>
-
-      <input
-        id="local"
-        type="text"
-        [formControl]="local"
-        placeholder="Ex.: Salvador, BA"
-        autocomplete="off"
-        (keyup.enter)="continuar()"
-      >
-
-    </div>
+      <span class="eyebrow">
+        PRIMEIRO, O LUGAR
+      </span>
 
 
-    @if (erro()) {
+      <h1>
+        Onde você quer viver
+        <span>seu Ritmo hoje?</span>
+      </h1>
 
-      <p class="mensagem-erro">
-        {{ erro() }}
+
+      <p>
+        Uma viagem, um fim de semana
+        ou algumas horas livres.
+        Escolha o lugar e o Ritmo adapta
+        a experiência ao seu dia.
       </p>
 
-    }
+    </section>
 
 
-    <button
-      type="button"
-      class="continuar"
-      [disabled]="carregando()"
-      (click)="continuar()"
-    >
+    <!-- BUSCA -->
+    <section class="search-card">
 
-      @if (carregando()) {
-        Buscando local...
-      } @else {
-        Continuar →
+      <div class="search-title">
+
+        <div>
+
+          <span class="input-label">
+            CIDADE OU DESTINO
+          </span>
+
+          <strong>
+            Para onde vamos?
+          </strong>
+
+        </div>
+
+
+        <span class="search-pin">
+          ⌖
+        </span>
+
+      </div>
+
+
+      <div class="input-wrapper">
+
+        <span>
+          ⌕
+        </span>
+
+        <input
+          type="text"
+          name="local"
+          [(ngModel)]="local"
+          placeholder="Ex.: Salvador, Lisboa, Roma..."
+          autocomplete="off"
+          (keydown.enter)="continuar()"
+        >
+
+      </div>
+
+
+      @if (erro()) {
+
+        <div class="error-message">
+
+          <span>
+            !
+          </span>
+
+          {{ erro() }}
+
+        </div>
+
       }
 
-    </button>
+
+      <button
+        type="button"
+        class="continue-button"
+        [disabled]="carregando()"
+        (click)="continuar()"
+      >
+
+        @if (carregando()) {
+
+          <span class="loader"></span>
+
+          Buscando destino...
+
+        } @else {
+
+          Continuar
+
+          <span>
+            →
+          </span>
+
+        }
+
+      </button>
+
+    </section>
+
+
+    <!-- GEOAPIFY -->
+    <section class="geo-card">
+
+      <div class="geo-icon">
+        ✦
+      </div>
+
+
+      <div>
+
+        <strong>
+          O lugar é real. O contexto é seu.
+        </strong>
+
+        <p>
+          Usamos dados geográficos para localizar
+          o destino e encontrar experiências próximas.
+        </p>
+
+      </div>
+
+
+      <span class="geo-badge">
+        GEO
+      </span>
+
+    </section>
+
+
+    <!-- DECORAÇÃO -->
+    <section class="location-preview">
+
+      <div class="preview-line"></div>
+
+      <div class="preview-point point-start">
+        <span></span>
+      </div>
+
+      <div class="preview-point point-middle">
+        <span></span>
+      </div>
+
+      <div class="preview-point point-end">
+        <span></span>
+      </div>
+
+
+      <div class="preview-copy">
+
+        <span>
+          UM LUGAR
+        </span>
+
+        <strong>
+          vários jeitos de viver.
+        </strong>
+
+      </div>
+
+    </section>
 
   </main>
 

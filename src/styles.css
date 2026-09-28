@@ -1,56 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --ritmo-blue: #AACBDA;
-  --ritmo-green: #7C8F63;
-  --ritmo-lilac: #B9A6CE;
+  --verde-ritmo: #236B45;
+  --verde-escuro: #173E2B;
+  --verde-fundo: #0F261A;
 
-  --ritmo-dark: #15231c;
-  --ritmo-dark-soft: #1c2d24;
+  --azul-ritmo: #91CDFF;
 
-  --ritmo-cream: #f5f1e8;
-  --ritmo-text-soft: #b8c3bc;
+  --creme: #F7F4ED;
+  --cinza: #B8C1BB;
 }
 
 * {
   box-sizing: border-box;
+  font-family: 'Nunito', sans-serif !important;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-html,
 body {
   margin: 0;
-  min-height: 100%;
-}
-
-body {
-  font-family: 'Work Sans', sans-serif;
-  background: var(--ritmo-dark);
-  color: var(--ritmo-cream);
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: var(--verde-fundo);
+  color: var(--creme);
 }
 
 button,
 input,
 textarea,
-select {
-  font: inherit;
+select,
+a {
+  font-family: 'Nunito', sans-serif !important;
+}
+/* =========================
+   TEMA GLOBAL DO RITMO
+========================= */
+
+:root,
+html[data-theme='escuro'] {
+  color-scheme: dark;
+
+  --ritmo-background: #0F261A;
+  --ritmo-surface: #173E2B;
+  --ritmo-surface-secondary: #214C35;
+
+  --ritmo-text: #F7F4ED;
+  --ritmo-muted: #AEB9B2;
+
+  --ritmo-primary: #91CDFF;
+  --ritmo-green: #236B45;
+
+  --ritmo-border:
+    rgba(255, 255, 255, 0.08);
 }
 
-button {
-  cursor: pointer;
+
+html[data-theme='claro'] {
+  color-scheme: light;
+
+  --ritmo-background: #F5F3EC;
+
+  --ritmo-surface: #FFFFFF;
+
+  --ritmo-surface-secondary:
+    #E9F1EB;
+
+  --ritmo-text: #173E2B;
+
+  --ritmo-muted: #607168;
+
+  --ritmo-primary: #397CAB;
+
+  --ritmo-green: #236B45;
+
+  --ritmo-border:
+    rgba(23, 62, 43, 0.12);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Fraunces', serif;
+
+html,
+body {
+  margin: 0;
+
+  background:
+    var(--ritmo-background);
+
+  color:
+    var(--ritmo-text);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }

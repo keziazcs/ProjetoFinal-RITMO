@@ -1,0 +1,206 @@
+<div class="grupos-page">
+
+  <header class="app-top">
+
+    <button
+      type="button"
+      class="back-button"
+      aria-label="Voltar"
+      (click)="voltarHome()"
+    >
+      ←
+    </button>
+
+
+    <img
+      src="/images/logo-ritmo.png"
+      alt="Ritmo"
+      class="page-logo"
+    >
+
+
+    <span class="top-status">
+      GRUPOS
+    </span>
+
+  </header>
+
+
+  <main class="grupos-content">
+
+    <section class="intro">
+
+      <span class="eyebrow">
+        VIAJAR JUNTO
+      </span>
+
+      <h1>
+        Compartilhe o Ritmo.
+        <span>Sem perder o seu.</span>
+      </h1>
+
+      <p>
+        Crie grupos para organizar experiências,
+        compartilhar roteiros e combinar decisões
+        de forma simples.
+      </p>
+
+    </section>
+
+
+    <button
+      type="button"
+      class="create-button"
+      (click)="abrirCriacao()"
+    >
+      + Criar novo grupo
+    </button>
+
+
+    @if (grupos.length > 0) {
+
+      <section class="group-list">
+
+        @for (
+          grupo of grupos;
+          track grupo.id
+        ) {
+
+          <article class="group-card">
+
+            <div class="group-symbol">
+              ◌
+            </div>
+
+
+            <div class="group-info">
+
+              <span class="group-label">
+                GRUPO
+              </span>
+
+              <h2>
+                {{ grupo.nome }}
+              </h2>
+
+              <div class="group-meta">
+
+                <span>
+                  {{ grupo.membros }}
+                  membro
+                </span>
+
+                <span>
+                  Código:
+                  {{ grupo.codigo }}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="delete-button"
+              aria-label="Excluir grupo"
+              (click)="
+                excluirGrupo(
+                  grupo.id
+                )
+              "
+            >
+              ×
+            </button>
+
+          </article>
+
+        }
+
+      </section>
+
+    } @else {
+
+      <section class="empty-state">
+
+        <span>
+          ◌
+        </span>
+
+        <h2>
+          Nenhum grupo ainda
+        </h2>
+
+        <p>
+          Crie um grupo para começar
+          a compartilhar experiências.
+        </p>
+
+      </section>
+
+    }
+
+  </main>
+
+
+  @if (criandoGrupo) {
+
+    <div
+      class="modal-overlay"
+      (click)="fecharCriacao()"
+    >
+
+      <section
+        class="modal-card"
+        (click)="$event.stopPropagation()"
+      >
+
+        <span class="eyebrow">
+          NOVO GRUPO
+        </span>
+
+        <h2>
+          Como vamos chamar esse grupo?
+        </h2>
+
+
+        <input
+          type="text"
+          [(ngModel)]="nomeNovoGrupo"
+          placeholder="Ex.: Salvador com amigos"
+          (keydown.enter)="criarGrupo()"
+        >
+
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="fecharCriacao()"
+          >
+            Cancelar
+          </button>
+
+
+          <button
+            type="button"
+            class="confirm-button"
+            (click)="criarGrupo()"
+          >
+            Criar grupo
+          </button>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  }
+
+
+  <app-bottom-nav>
+  </app-bottom-nav>
+
+</div>

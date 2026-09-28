@@ -2,186 +2,350 @@
 
   @if (roteiro) {
 
-    <header class="roteiro-header">
+    <section
+      class="roteiro-hero"
+      [style.background-image]="
+        'url(' + imagemRoteiro() + ')'
+      "
+    >
 
-      <button
-        type="button"
-        class="voltar"
-        (click)="voltar()"
-      >
-        ←
-      </button>
+      <div class="hero-overlay"></div>
 
-      <div class="marca">
-        Ritmo<span>.</span>
+
+      <div class="hero-top">
+
+        <!-- VOLTAR -->
+        <button
+          type="button"
+          class="circle-button"
+          aria-label="Voltar"
+          (click)="voltar()"
+        >
+          ←
+        </button>
+
+
+        <!-- FAVORITO -->
+        <button
+          type="button"
+          class="circle-button favorite"
+          [class.active]="favorito"
+          aria-label="Favoritar roteiro"
+          (click)="alternarFavorito()"
+        >
+
+          @if (favorito) {
+            ♥
+          } @else {
+            ♡
+          }
+
+        </button>
+
       </div>
 
-      <div></div>
 
-    </header>
+      <div class="hero-content">
+
+        <span class="hero-label">
+          EXPERIÊNCIA RITMO
+        </span>
+
+        <h1>
+          {{ roteiro.nome }}
+        </h1>
+
+
+        <div class="hero-meta">
+
+          <span>
+            ◷ {{ roteiro.duracaoTotal }}h
+          </span>
+
+          <span>
+            ↝ {{ roteiro.distanciaTotal }} km
+          </span>
+
+          <span>
+            R$ {{ roteiro.custoTotal }}
+          </span>
+
+          <span class="intensidade">
+            {{ roteiro.intensidade }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    @if (mensagem) {
+
+      <div class="toast">
+        {{ mensagem }}
+      </div>
+
+    }
 
 
     <main class="roteiro-content">
 
-      <span class="etapa">
-        SEU RITMO DE HOJE
-      </span>
+      <section class="intro">
 
-      <h1>
-        {{ roteiro.nome }}
-      </h1>
+        <div>
 
-      <p class="descricao">
-        Veja como seu dia está organizado antes de começar.
-      </p>
+          <span class="eyebrow">
+            DO SEU JEITO
+          </span>
 
+          <h2>
+            Um roteiro para viver,
+            <span>não para correr.</span>
+          </h2>
 
-      <section class="resumo">
-
-        <div class="indicador">
-          <span>Duração</span>
-          <strong>
-            {{ roteiro.duracaoTotal }}h
-          </strong>
         </div>
 
-        <div class="indicador">
-          <span>Distância</span>
+
+        <p>
+          Este Ritmo considera tempo,
+          deslocamento, intensidade e pausas
+          para transformar o roteiro em uma
+          experiência possível para o seu dia.
+        </p>
+
+      </section>
+
+
+      <section class="resumo-grid">
+
+        <article class="resumo-card">
+
+          <span class="resumo-icon">
+            ◷
+          </span>
+
+          <span class="resumo-label">
+            DURAÇÃO
+          </span>
+
+          <strong>
+            {{ roteiro.duracaoTotal }} horas
+          </strong>
+
+        </article>
+
+
+        <article class="resumo-card">
+
+          <span class="resumo-icon">
+            ↝
+          </span>
+
+          <span class="resumo-label">
+            CAMINHO
+          </span>
+
           <strong>
             {{ roteiro.distanciaTotal }} km
           </strong>
-        </div>
 
-        <div class="indicador">
-          <span>Custo</span>
+        </article>
+
+
+        <article class="resumo-card">
+
+          <span class="resumo-icon">
+            ◌
+          </span>
+
+          <span class="resumo-label">
+            ESTIMATIVA
+          </span>
+
           <strong>
             R$ {{ roteiro.custoTotal }}
           </strong>
-        </div>
 
-        <div class="indicador">
-          <span>Intensidade</span>
-          <strong>
+        </article>
+
+
+        <article class="resumo-card">
+
+          <span class="resumo-icon">
+            ✦
+          </span>
+
+          <span class="resumo-label">
+            RITMO
+          </span>
+
+          <strong class="capitalize">
             {{ roteiro.intensidade }}
           </strong>
-        </div>
+
+        </article>
 
       </section>
 
 
-      <section class="timeline">
+      <section class="trajeto-section">
 
-        <div class="timeline-header">
+        <header class="section-header">
 
-          <span>
-            COMO SERÁ O DIA
+          <span class="eyebrow">
+            SEU DIA
           </span>
 
           <h2>
-            Seu caminho
+            O caminho do seu Ritmo
           </h2>
 
+          <p>
+            Cada parada faz parte da experiência.
+            Você não precisa transformar o passeio
+            em uma corrida contra o relógio.
+          </p>
+
+        </header>
+
+
+        <div class="timeline">
+
+          @for (
+            lugar of roteiro.lugares;
+            track lugar.id;
+            let indice = $index
+          ) {
+
+            <article class="timeline-item">
+
+              <div class="timeline-marker">
+
+                <span>
+                  {{ indice + 1 }}
+                </span>
+
+              </div>
+
+
+              <div class="timeline-card">
+
+                <div class="timeline-top">
+
+                  <div>
+
+                    <span class="categoria">
+                      {{ lugar.categoria }}
+                    </span>
+
+                    <h3>
+                      {{ lugar.nome }}
+                    </h3>
+
+                  </div>
+
+
+                  <span
+                    class="esforco"
+                    [class.leve]="
+                      lugar.nivelEsforco === 'leve'
+                    "
+                    [class.moderado]="
+                      lugar.nivelEsforco === 'moderado'
+                    "
+                    [class.intenso]="
+                      lugar.nivelEsforco === 'intenso'
+                    "
+                  >
+                    {{ lugar.nivelEsforco }}
+                  </span>
+
+                </div>
+
+
+                <div class="timeline-meta">
+
+                  <span>
+                    ◷ {{ lugar.duracaoMedia }}h
+                  </span>
+
+                  <span>
+                    R$ {{ lugar.custoMedio }}
+                  </span>
+
+                  @if (lugar.temDescanso) {
+
+                    <span>
+                      pausa disponível
+                    </span>
+
+                  }
+
+                  @if (lugar.temEscadas) {
+
+                    <span>
+                      possui escadas
+                    </span>
+
+                  }
+
+                </div>
+
+              </div>
+
+            </article>
+
+          }
+
         </div>
-
-
-        @for (
-          lugar of roteiro.lugares;
-          track lugar.id;
-          let indice = $index
-        ) {
-
-          <article class="parada">
-
-            <div class="numero">
-              {{ indice + 1 }}
-            </div>
-
-
-            <div class="parada-content">
-
-              <span class="categoria">
-                {{ lugar.categoria }}
-              </span>
-
-              <h3>
-                {{ lugar.nome }}
-              </h3>
-
-
-              <div class="dados">
-
-                <span>
-                  ⏱ {{ lugar.duracaoMedia }} min
-                </span>
-
-                <span>
-                  R$ {{ lugar.custoMedio }}
-                </span>
-
-                <span>
-                  Esforço: {{ lugar.nivelEsforco }}
-                </span>
-
-              </div>
-
-
-              <div class="caracteristicas">
-
-                @if (lugar.temDescanso) {
-                  <span>
-                    ✓ oportunidade de descanso
-                  </span>
-                }
-
-                @if (lugar.temEscadas) {
-                  <span>
-                    ↗ possui escadas
-                  </span>
-                }
-
-                @if (lugar.ambiente === 'interno') {
-                  <span>
-                    ◉ ambiente interno
-                  </span>
-                }
-
-                @if (lugar.ambiente === 'externo') {
-                  <span>
-                    ☀ ambiente externo
-                  </span>
-                }
-
-              </div>
-
-            </div>
-
-          </article>
-
-        }
 
       </section>
 
 
-      <section class="inicio-dia">
+      <section class="cta-card">
 
         <div>
-          <span>
-            TUDO CERTO?
+
+          <span class="eyebrow">
+            PRONTO PARA IR?
           </span>
 
           <h2>
-            O plano está pronto.
-            Agora é hora de viver.
+            Este pode ser
+            <span>o seu Ritmo de hoje.</span>
           </h2>
+
+          <p>
+            Se o seu dia mudou, ajuste seu
+            contexto antes de começar.
+          </p>
+
         </div>
 
-        <button
-          type="button"
-          class="comecar"
-          (click)="comecarDia()"
-        >
-          Começar o dia →
-        </button>
+
+        <div class="cta-actions">
+
+          <button
+            type="button"
+            class="secondary-action"
+            (click)="ajustarRitmo()"
+          >
+            Ajustar Ritmo
+          </button>
+
+
+          <button
+            type="button"
+            class="primary-action"
+            (click)="iniciarRitmo()"
+          >
+            Começar este Ritmo
+            <span>→</span>
+          </button>
+
+        </div>
 
       </section>
 

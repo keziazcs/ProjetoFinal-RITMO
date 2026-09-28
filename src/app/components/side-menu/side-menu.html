@@ -8,29 +8,31 @@
     (click)="$event.stopPropagation()"
   >
 
-    <header class="menu-header">
+    <div class="menu-header">
 
-      <div class="menu-brand">
-        Ritmo<span>.</span>
-      </div>
+  <img
+    class="menu-logo"
+    src="/images/logo-ritmo.png"
+    alt="Ritmo"
+  >
 
-      <button
-        type="button"
-        class="fechar"
-        aria-label="Fechar menu"
-        (click)="fecharMenu()"
-      >
-        ×
-      </button>
+  <button
+    type="button"
+    class="close-menu"
+    aria-label="Fechar menu"
+    (click)="fecharMenu()"
+  >
+    ×
+  </button>
 
-    </header>
+    </div>
 
 
     <nav class="menu-nav">
 
       <button
         type="button"
-        (click)="irParaInicio()"
+        (click)="navegar('/home')"
       >
         <span>⌂</span>
         Início
@@ -39,27 +41,25 @@
 
       <button
         type="button"
-        (click)="irParaRitmo()"
+        (click)="navegar('/local')"
       >
         <span>✦</span>
-        Meu Ritmo
+        Encontrar meu Ritmo
       </button>
 
 
       <button
         type="button"
-        class="indisponivel"
-        disabled
+        (click)="navegar('/feed')"
       >
-        <span>◌</span>
-        Grupos
+        <span>⌕</span>
+        Explorar
       </button>
 
 
       <button
         type="button"
-        class="indisponivel"
-        disabled
+        (click)="navegar('/favoritos')"
       >
         <span>♡</span>
         Favoritos
@@ -68,8 +68,16 @@
 
       <button
         type="button"
-        class="indisponivel"
-        disabled
+        (click)="navegar('/grupos')"
+      >
+        <span>◌</span>
+        Grupos
+      </button>
+
+
+      <button
+        type="button"
+        (click)="navegar('/perfil')"
       >
         <span>○</span>
         Perfil
@@ -82,14 +90,45 @@
 
       <button
         type="button"
-        class="sair"
+        class="logout-button"
         (click)="sair()"
       >
-        Sair
+        Sair da conta
       </button>
 
     </div>
 
   </aside>
+
+</div>
+
+<div class="menu-footer">
+
+  <div class="menu-divider">
+  </div>
+
+
+  <button
+    type="button"
+    class="logout-button"
+    (click)="sair()"
+  >
+    <span class="logout-icon">
+      ↪
+    </span>
+
+    <div>
+
+      <strong>
+        Sair da conta
+      </strong>
+
+      <small>
+        Encerrar esta sessão
+      </small>
+
+    </div>
+
+  </button>
 
 </div>

@@ -1,0 +1,277 @@
+.feed-page {
+  min-height: 100vh;
+  padding: 30px 18px 110px;
+
+  background:
+    var(--ritmo-background, #0F261A);
+
+  color:
+    var(--ritmo-text, #F7F4ED);
+
+  font-family:
+    'Nunito',
+    sans-serif;
+}
+
+.feed-header,
+.roteiros-section,
+.lugares-reais {
+  width: min(820px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feed-header {
+  margin-bottom: 35px;
+}
+
+.feed-header h1 {
+  margin: 8px 0;
+
+  font-size:
+    clamp(38px, 6vw, 54px);
+
+  font-weight: 900;
+
+  line-height: 0.98;
+}
+
+.eyebrow {
+  color: #91CDFF;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+}
+
+.feed-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+.feed-card {
+  overflow: hidden;
+
+  border-radius: 25px;
+
+  background:
+    var(--ritmo-surface, #173E2B);
+
+  cursor: pointer;
+}
+
+.card-visual {
+  min-height: 300px;
+
+  padding: 18px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  background-position: center;
+  background-size: cover;
+}
+
+.intensidade {
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(10,28,18,0.70);
+
+  color: #91CDFF;
+
+  font-size: 9px;
+
+  font-weight: 900;
+}
+
+.favorite-button {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background:
+    rgba(10,28,18,0.70);
+
+  color: white;
+
+  font-size: 18px;
+}
+
+.favorite-button.active {
+  background: #91CDFF;
+
+  color: #173E2B;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h2 {
+  margin:
+    4px
+    0
+    14px;
+
+  font-size: 26px;
+}
+
+.card-city {
+  color: #91CDFF;
+
+  font-size: 8px;
+
+  font-weight: 900;
+}
+
+.card-meta {
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+
+  color:
+    var(--ritmo-muted, #AEB9B2);
+
+  font-size: 10px;
+}
+
+.open-button {
+  width: 100%;
+
+  min-height: 46px;
+
+  border:
+    1px solid
+    rgba(145,205,255,0.18);
+
+  border-radius: 999px;
+
+  background:
+    rgba(145,205,255,0.05);
+
+  color: #91CDFF;
+
+  font-weight: 900;
+}
+
+
+/* GEOAPIFY */
+
+.lugares-reais {
+  margin-top: 50px;
+}
+
+.real-header {
+  margin-bottom: 16px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.real-header h2 {
+  margin:
+    7px
+    0;
+
+  font-size: 28px;
+}
+
+.real-header h2 span {
+  color: #91CDFF;
+}
+
+.change-city {
+  border: none;
+
+  background: transparent;
+
+  color: #91CDFF;
+
+  font-weight: 900;
+}
+
+.real-scroll {
+  display: flex;
+
+  gap: 12px;
+
+  overflow-x: auto;
+}
+
+.real-card {
+  min-width: 230px;
+
+  padding: 17px;
+
+  border-radius: 18px;
+
+  background:
+    var(--ritmo-surface, #173E2B);
+}
+
+.real-category,
+.distance {
+  color: #91CDFF;
+
+  font-size: 8px;
+
+  font-weight: 900;
+}
+
+.real-card h3 {
+  margin:
+    8px
+    0;
+
+  font-size: 16px;
+}
+
+.real-card p {
+  color:
+    var(--ritmo-muted, #AEB9B2);
+
+  font-size: 9px;
+}
+
+.status-box {
+  padding: 22px;
+
+  border-radius: 18px;
+
+  background:
+    var(--ritmo-surface, #173E2B);
+
+  color:
+    var(--ritmo-muted, #AEB9B2);
+}
+
+.status-box button {
+  margin-top: 10px;
+
+  padding: 10px 15px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #91CDFF;
+
+  color: #173E2B;
+
+  font-weight: 900;
+}

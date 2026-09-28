@@ -1,0 +1,295 @@
+<div class="perfil-page">
+
+  <!-- CABEÇALHO -->
+  <header class="perfil-header">
+
+    <div class="avatar">
+      {{ inicialUsuario }}
+    </div>
+
+
+    <div class="perfil-identidade">
+
+      <span class="eyebrow">
+        SEU PERFIL
+      </span>
+
+      <h1>
+        {{ nomeUsuario }}
+      </h1>
+
+      @if (emailUsuario) {
+        <p>
+          {{ emailUsuario }}
+        </p>
+      }
+
+    </div>
+
+  </header>
+
+
+  <!-- RESUMO -->
+  <section class="profile-card">
+
+    <div class="profile-info">
+
+      <span class="info-label">
+        CIDADE ATUAL
+      </span>
+
+      <strong>
+        {{ cidade }}
+      </strong>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="encontrarRitmo()"
+    >
+      Encontrar meu Ritmo
+    </button>
+
+  </section>
+
+
+  <!-- MEU RITMO -->
+  <section class="perfil-section">
+
+    <header class="section-header">
+
+      <div>
+
+        <span class="eyebrow">
+          SUA EXPERIÊNCIA
+        </span>
+
+        <h2>
+          Meu Ritmo
+        </h2>
+
+      </div>
+
+    </header>
+
+
+    <div class="option-grid">
+
+      <button
+        type="button"
+        class="option-card"
+        (click)="abrirFavoritos()"
+      >
+
+        <span class="option-icon">
+          ♡
+        </span>
+
+        <div>
+
+          <strong>
+            Favoritos
+          </strong>
+
+          <p>
+            Experiências que você
+            guardou para depois.
+          </p>
+
+        </div>
+
+        <span class="arrow">
+          →
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="option-card"
+      >
+
+        <span class="option-icon">
+          ↺
+        </span>
+
+        <div>
+
+          <strong>
+            Histórico
+          </strong>
+
+          <p>
+            Relembre os Ritmos que
+            você já viveu.
+          </p>
+
+        </div>
+
+        <span class="arrow">
+          →
+        </span>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- APARÊNCIA -->
+  <section class="perfil-section">
+
+    <header class="section-header">
+
+      <div>
+
+        <span class="eyebrow">
+          PREFERÊNCIAS
+        </span>
+
+        <h2>
+          Aparência
+        </h2>
+
+        <p>
+          Escolha como você prefere
+          usar o Ritmo.
+        </p>
+
+      </div>
+
+    </header>
+
+
+    <div class="theme-selector">
+
+      <button
+        type="button"
+        class="theme-option"
+        [class.active]="temaAtivo('claro')"
+        (click)="alterarTema('claro')"
+      >
+
+        <span class="theme-icon">
+          ☀
+        </span>
+
+        <span>
+          Claro
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="theme-option"
+        [class.active]="temaAtivo('escuro')"
+        (click)="alterarTema('escuro')"
+      >
+
+        <span class="theme-icon">
+          ◐
+        </span>
+
+        <span>
+          Escuro
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="theme-option"
+        [class.active]="temaAtivo('sistema')"
+        (click)="alterarTema('sistema')"
+      >
+
+        <span class="theme-icon">
+          ◉
+        </span>
+
+        <span>
+          Sistema
+        </span>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTA -->
+  <section class="perfil-section">
+
+    <header class="section-header">
+
+      <div>
+
+        <span class="eyebrow">
+          CONTA
+        </span>
+
+        <h2>
+          Configurações
+        </h2>
+
+      </div>
+
+    </header>
+
+
+    <div class="settings-list">
+
+      <button
+        type="button"
+        class="settings-item"
+      >
+        <span>
+          Privacidade
+        </span>
+
+        <span>
+          →
+        </span>
+      </button>
+
+
+      <button
+        type="button"
+        class="settings-item"
+      >
+        <span>
+          Ajuda e suporte
+        </span>
+
+        <span>
+          →
+        </span>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <button
+    type="button"
+    class="logout-button"
+    (click)="sair()"
+  >
+    Sair da conta
+  </button>
+
+
+  <app-bottom-nav>
+  </app-bottom-nav>
+
+</div>

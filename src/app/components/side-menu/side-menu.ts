@@ -1,43 +1,58 @@
 import {
   Component,
-  EventEmitter,
-  Output
+  inject,
+  output
 } from '@angular/core';
 
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-menu',
-  standalone: true,
   imports: [],
   templateUrl: './side-menu.html',
   styleUrl: './side-menu.css'
 })
 export class SideMenu {
 
-  @Output()
-  fechar = new EventEmitter<void>();
+  private readonly router =
+    inject(Router);
 
-  constructor(
-    private readonly router: Router
-  ) {}
+  menuFechado =
+    output<void>();
 
-  fecharMenu(): void {
-    this.fechar.emit();
+
+  protected fecharMenu(): void {
+
+    this.menuFechado.emit();
+
   }
 
-  irParaInicio(): void {
-    this.router.navigate(['/home']);
-    this.fecharMenu();
+
+  protected navegar(
+    rota: string
+  ): void {
+
+    this.menuFechado.emit();
+
+    this.router.navigate([
+      rota
+    ]);
+
   }
 
-  irParaRitmo(): void {
-    this.router.navigate(['/contexto-do-dia']);
-    this.fecharMenu();
-  }
 
-  sair(): void {
-    this.router.navigate(['/login']);
+  protected sair(): void {
+
+    localStorage.removeItem(
+      'ritmoLogado'
+    );
+
+    this.menuFechado.emit();
+
+    this.router.navigate([
+      '/login'
+    ]);
+
   }
 
 }

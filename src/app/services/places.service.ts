@@ -1,55 +1,51 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable,
+  inject
+} from '@angular/core';
 
-import { environment } from '../../environments/environment';
+import {
+  HttpClient,
+  HttpParams
+} from '@angular/common/http';
 
-import { ROTEIROS } from '../data/roteiros';
+import {
+  Observable,
+  map
+} from 'rxjs';
+
+import { environment }
+  from '../../environments/environment';
 
 
 export interface LugarEncontrado {
   id: string;
-
   nome: string;
-
   categoria: string;
-
   categorias: string[];
-
   lat: number | null;
   lon: number | null;
-
   endereco: string | null;
-
   distanciaMetros: number | null;
-
   placeId: string | null;
-
-  fonte: 'geoapify' | 'fallback';
-}
-
-
-interface GeoapifyPlaceProperties {
-  name?: string;
-
-  lat?: number;
-  lon?: number;
-
-  formatted?: string;
-
-  categories?: string[];
-
-  distance?: number;
-
-  place_id?: string;
+  fonte: 'geoapify';
 }
 
 
 interface GeoapifyFeature {
-  properties: GeoapifyPlaceProperties;
+  properties?: {
+    name?: string;
+    formatted?: string;
+    categories?: string[];
+    lat?: number;
+    lon?: number;
+    place_id?: string;
+    distance?: number;
+  };
 }
 
 
-interface GeoapifyResposta {
-  features: GeoapifyFeature[];
+interface GeoapifyResponse {
+  features?: GeoapifyFeature[];
 }
 
 
@@ -58,293 +54,151 @@ interface GeoapifyResposta {
 })
 export class PlacesService {
 
-  private readonly baseUrl =
+  private readonly http =
+    inject(HttpClient);
+
+  private readonly apiUrl =
     'https://api.geoapify.com/v2/places';
 
 
-  async buscarLugares(
+  buscarLugares(
     lat: number,
     lon: number,
-    categoria: string,
-    raioMetros: number
-  ): Promise<LugarEncontrado[]> {
+    raioMetros = 8000
+  ): Observable<LugarEncontrado[]> {
 
-    try {
+    const params =
+      new HttpParams()
 
-      const lugaresApi =
-        await this.buscarNaGeoapify(
-          lat,
-          lon,
-          categoria,
-          raioMetros
+        .set(
+          'categories',
+          [
+            'tourism',
+            'entertainment',
+            'catering'
+          ].join(',')
+        )
+
+        .set(
+          'filter',
+          `circle:${lon},${lat},${raioMetros}`
+        )
+
+        .set(
+          'bias',
+          `proximity:${lon},${lat}`
+        )
+
+        .set(
+          'limit',
+          '20'
+        )
+
+        .set(
+          'lang',
+          'pt'
+        )
+
+        .set(
+          'apiKey',
+          environment.geoapifyApiKey
         );
 
 
-      if (lugaresApi.length >= 3) {
-        return lugaresApi;
-      }
-
-
-      return this.buscarFallback(
-        categoria
-      );
-
-    } catch (erro) {
-
-      console.error(
-        'Erro ao consultar Geoapify Places:',
-        erro
-      );
-
-
-      return this.buscarFallback(
-        categoria
-      );
-
-    }
-
-  }
-
-
-  private async buscarNaGeoapify(
-    lat: number,
-    lon: number,
-    categoria: string,
-    raioMetros: number
-  ): Promise<LugarEncontrado[]> {
-
-    const filtro =
-      `circle:${lon},${lat},${raioMetros}`;
-
-
-    const bias =
-      `proximity:${lon},${lat}`;
-
-
-    const parametros =
-      new URLSearchParams({
-
-        categories: categoria,
-
-        filter: filtro,
-
-        bias: bias,
-
-        limit: '20',
-
-        lang: 'pt',
-
-        apiKey:
-          environment.geoapifyApiKey
-      });
-
-
-    const resposta =
-      await fetch(
-        `${this.baseUrl}?${parametros.toString()}`
-      );
-
-
-    if (!resposta.ok) {
-
-      throw new Error(
-        `Geoapify Places retornou status ${resposta.status}`
-      );
-
-    }
-
-
-    const dados =
-      await resposta.json() as GeoapifyResposta;
-
-
-    if (
-      !dados.features ||
-      dados.features.length === 0
-    ) {
-
-      return [];
-
-    }
-
-
-    return dados.features
-      .map(
-        (
-          feature,
-          index
-        ): LugarEncontrado | null => {
-
-          const propriedades =
-            feature.properties;
-
-
-          /*
-           * Sem nome não é útil para
-           * apresentarmos ao usuário.
-           */
-          if (!propriedades.name) {
-            return null;
-          }
-
-
-          return {
-
-            id:
-              propriedades.place_id ??
-              `geoapify-${index}`,
-
-            nome:
-              propriedades.name,
-
-            categoria,
-
-            categorias:
-              propriedades.categories ?? [],
-
-            lat:
-              propriedades.lat ?? null,
-
-            lon:
-              propriedades.lon ?? null,
-
-            endereco:
-              propriedades.formatted ?? null,
-
-            distanciaMetros:
-              propriedades.distance ?? null,
-
-            placeId:
-              propriedades.place_id ?? null,
-
-            fonte:
-              'geoapify'
-          };
-
-        }
+    return this.http
+      .get<GeoapifyResponse>(
+        this.apiUrl,
+        { params }
       )
-      .filter(
-        (
-          lugar
-        ): lugar is LugarEncontrado =>
-          lugar !== null
+      .pipe(
+
+        map(response => {
+
+          const features =
+            response.features ?? [];
+
+
+          return features
+            .map(
+              (
+                feature,
+                index
+              ): LugarEncontrado | null => {
+
+                const properties =
+                  feature.properties;
+
+
+                if (!properties) {
+                  return null;
+                }
+
+
+                const nome =
+                  properties.name
+                  ?? properties.formatted
+                  ?? 'Local sem nome';
+
+
+                const categorias =
+                  properties.categories
+                  ?? [];
+
+
+                const categoria =
+                  categorias[0]
+                  ?? 'local';
+
+
+                return {
+
+                  id:
+                    properties.place_id
+                    ?? `geoapify-${index}`,
+
+                  nome,
+
+                  categoria,
+
+                  categorias,
+
+                  lat:
+                    properties.lat
+                    ?? null,
+
+                  lon:
+                    properties.lon
+                    ?? null,
+
+                  endereco:
+                    properties.formatted
+                    ?? null,
+
+                  distanciaMetros:
+                    properties.distance
+                    ?? null,
+
+                  placeId:
+                    properties.place_id
+                    ?? null,
+
+                  fonte:
+                    'geoapify'
+
+                };
+
+              }
+            )
+            .filter(
+              (
+                lugar
+              ): lugar is LugarEncontrado =>
+                lugar !== null
+            );
+
+        })
+
       );
-
-  }
-
-
-  private buscarFallback(
-    categoria: string
-  ): LugarEncontrado[] {
-
-    const lugaresUnicos =
-  new Map<string | number, LugarEncontrado>();
-
-
-    for (const roteiro of ROTEIROS) {
-
-      for (const lugar of roteiro.lugares) {
-
-        /*
-         * O fallback é mock/curado.
-         * Não inventamos coordenadas,
-         * endereço ou distância.
-         */
-        if (
-          lugar.categoria === categoria ||
-          lugar.interesses.includes(categoria)
-        ) {
-
-          lugaresUnicos.set(
-            lugar.id,
-            {
-              id:
-                `fallback-${lugar.id}`,
-
-              nome:
-                lugar.nome,
-
-              categoria:
-                lugar.categoria,
-
-              categorias: [
-                lugar.categoria,
-                ...lugar.interesses
-              ],
-
-              lat: null,
-
-              lon: null,
-
-              endereco: null,
-
-              distanciaMetros: null,
-
-              placeId: null,
-
-              fonte: 'fallback'
-            }
-          );
-
-        }
-
-      }
-
-    }
-
-
-    /*
-     * Se a categoria da Geoapify
-     * não possuir equivalente no mock,
-     * ainda aplicamos o fallback exigido.
-     */
-    if (lugaresUnicos.size === 0) {
-
-      for (const roteiro of ROTEIROS) {
-
-        for (const lugar of roteiro.lugares) {
-
-          lugaresUnicos.set(
-            lugar.id,
-            {
-              id:
-                `fallback-${lugar.id}`,
-
-              nome:
-                lugar.nome,
-
-              categoria:
-                lugar.categoria,
-
-              categorias: [
-                lugar.categoria,
-                ...lugar.interesses
-              ],
-
-              lat: null,
-
-              lon: null,
-
-              endereco: null,
-
-              distanciaMetros: null,
-
-              placeId: null,
-
-              fonte: 'fallback'
-            }
-          );
-
-        }
-
-      }
-
-    }
-
-
-    return Array.from(
-      lugaresUnicos.values()
-    );
 
   }
 

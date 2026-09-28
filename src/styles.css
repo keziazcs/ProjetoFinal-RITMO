@@ -1,87 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
 
-:root {
-  --verde-ritmo: #236B45;
-  --verde-escuro: #173E2B;
-  --verde-fundo: #0F261A;
 
-  --azul-ritmo: #91CDFF;
-
-  --creme: #F7F4ED;
-  --cinza: #B8C1BB;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: 'Nunito', sans-serif !important;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: var(--verde-fundo);
-  color: var(--creme);
-}
-
-button,
-input,
-textarea,
-select,
-a {
-  font-family: 'Nunito', sans-serif !important;
-}
 /* =========================
-   TEMA GLOBAL DO RITMO
+   VARIÁVEIS RITMO
 ========================= */
 
-:root,
-html[data-theme='escuro'] {
-  color-scheme: dark;
-
+:root {
   --ritmo-background: #0F261A;
+
   --ritmo-surface: #173E2B;
-  --ritmo-surface-secondary: #214C35;
+
+  --ritmo-surface-soft:
+    rgba(145, 205, 255, 0.045);
+
+  --ritmo-green: #236B45;
+
+  --ritmo-green-dark: #173E2B;
+
+  --ritmo-blue: #91CDFF;
+
+  --ritmo-blue-hover: #AAD9FF;
 
   --ritmo-text: #F7F4ED;
+
   --ritmo-muted: #AEB9B2;
 
-  --ritmo-primary: #91CDFF;
-  --ritmo-green: #236B45;
-
   --ritmo-border:
-    rgba(255, 255, 255, 0.08);
+    rgba(255, 255, 255, 0.07);
+
+  --ritmo-danger: #EC7869;
 }
 
 
-html[data-theme='claro'] {
-  color-scheme: light;
+/* =========================
+   RESET
+========================= */
 
-  --ritmo-background: #F5F3EC;
+html {
+  width: 100%;
+  min-height: 100%;
 
-  --ritmo-surface: #FFFFFF;
-
-  --ritmo-surface-secondary:
-    #E9F1EB;
-
-  --ritmo-text: #173E2B;
-
-  --ritmo-muted: #607168;
-
-  --ritmo-primary: #397CAB;
-
-  --ritmo-green: #236B45;
-
-  --ritmo-border:
-    rgba(23, 62, 43, 0.12);
-}
-
-
-html,
-body {
   margin: 0;
+  padding: 0;
+
+  background:
+    var(--ritmo-background);
+}
+
+
+body {
+  width: 100%;
+  min-width: 100%;
+
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
 
   background:
     var(--ritmo-background);
@@ -89,7 +65,212 @@ body {
   color:
     var(--ritmo-text);
 
-  transition:
-    background 0.25s ease,
-    color 0.25s ease;
+  font-family:
+    'Nunito',
+    Arial,
+    sans-serif;
+
+  font-size: 16px;
+
+  -webkit-font-smoothing:
+    antialiased;
+
+  -moz-osx-font-smoothing:
+    grayscale;
+}
+
+
+app-root {
+  display: block;
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  background:
+    var(--ritmo-background);
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   ELEMENTOS BASE
+========================= */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+
+button {
+  cursor: pointer;
+}
+
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+
+img {
+  max-width: 100%;
+}
+
+
+a {
+  color: inherit;
+
+  text-decoration: none;
+}
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+
+/* =========================
+   SELEÇÃO
+========================= */
+
+::selection {
+  background:
+    rgba(145, 205, 255, 0.25);
+
+  color:
+    var(--ritmo-text);
+}
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+  background:
+    var(--ritmo-background);
+}
+
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    rgba(145, 205, 255, 0.18);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(145, 205, 255, 0.30);
+}
+
+
+/* FIREFOX */
+
+* {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(145, 205, 255, 0.18)
+    var(--ritmo-background);
+}
+
+
+/* =========================
+   FOCO / ACESSIBILIDADE
+========================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline:
+    2px solid
+    var(--ritmo-blue);
+
+  outline-offset: 3px;
+}
+
+
+/* =========================
+   TEMA CLARO
+========================= */
+
+body.light-theme {
+  --ritmo-background: #F6F7F4;
+
+  --ritmo-surface: #FFFFFF;
+
+  --ritmo-surface-soft:
+    rgba(35, 107, 69, 0.05);
+
+  --ritmo-green: #236B45;
+
+  --ritmo-green-dark: #173E2B;
+
+  --ritmo-blue: #4AA9E8;
+
+  --ritmo-blue-hover: #69BAEF;
+
+  --ritmo-text: #173E2B;
+
+  --ritmo-muted: #647269;
+
+  --ritmo-border:
+    rgba(23, 62, 43, 0.10);
+
+  background:
+    var(--ritmo-background);
+
+  color:
+    var(--ritmo-text);
+}
+
+
+body.light-theme app-root {
+  background:
+    var(--ritmo-background);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  body {
+    font-size: 15px;
+  }
+
 }

@@ -1,10 +1,13 @@
 import {
   Injectable,
+  Renderer2,
+  RendererFactory2,
   signal
 } from '@angular/core';
 
+
 export type ModoTema =
-  | 'claro'
+  'claro'
   | 'escuro'
   | 'sistema';
 
@@ -14,81 +17,30 @@ export type ModoTema =
 })
 export class Tema {
 
-  private readonly chaveStorage =
-    'ritmoTema';
-
-  private readonly modoSignal =
-    signal<ModoTema>(
-      this.carregarPreferencia()
-    );
+  private readonly renderer:
+    Renderer2;
 
   readonly modo =
-    this.modoSignal.asReadonly();
+    signal<ModoTema>('escuro');
 
 
-  private readonly sistemaEscuro =
-    window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    );
+  constructor(
+    rendererFactory:
+      RendererFactory2
+  ) {
 
+    this.renderer =
+      rendererFactory
+        .createRenderer(
+          null,
+          null
+        );
 
-  constructor() {
-
-    this.aplicarTema(
-      this.modoSignal()
-    );
-
-
-    this.sistemaEscuro.addEventListener(
-      'change',
-      () => {
-
-        if (
-          this.modoSignal() ===
-          'sistema'
-        ) {
-
-          this.aplicarTema(
-            'sistema'
-          );
-
-        }
-
-      }
-    );
-
-  }
-
-
-  definirModo(
-    modo: ModoTema
-  ): void {
-
-    this.modoSignal.set(
-      modo
-    );
-
-
-    localStorage.setItem(
-      this.chaveStorage,
-      modo
-    );
-
-
-    this.aplicarTema(
-      modo
-    );
-
-  }
-
-
-  private carregarPreferencia():
-    ModoTema {
 
     const salvo =
       localStorage.getItem(
-        this.chaveStorage
-      );
+        'ritmoTema'
+      ) as ModoTema | null;
 
 
     if (
@@ -97,43 +49,84 @@ export class Tema {
       salvo === 'sistema'
     ) {
 
-      return salvo;
+      this.modo.set(
+        salvo
+      );
 
     }
 
 
-    return 'sistema';
+    this.aplicarTema();
 
   }
 
 
-  private aplicarTema(
+  definirModo(
     modo: ModoTema
   ): void {
 
-    let temaFinal:
-      'claro' | 'escuro';
+    this.modo.set(
+      modo
+    );
 
 
-    if (modo === 'sistema') {
+    localStorage.setItem(
+      'ritmoTema',
+      modo
+    );
 
-      temaFinal =
-        this.sistemaEscuro.matches
-          ? 'escuro'
-          : 'claro';
 
-    } else {
+    this.aplicarTema();
 
-      temaFinal = modo;
+  }
+
+
+  private aplicarTema(): void {
+
+    const body =
+      document.body;
+
+
+    this.renderer.removeClass(
+      body,
+      'light-theme'
+    );
+
+
+    if (
+      this.modo() === 'claro'
+    ) {
+
+      this.renderer.addClass(
+        body,
+        'light-theme'
+      );
+
+      return;
 
     }
 
 
-    document.documentElement
-      .setAttribute(
-        'data-theme',
-        temaFinal
-      );
+    if (
+      this.modo() === 'sistema'
+    ) {
+
+      const prefereClaro =
+        window.matchMedia(
+          '(prefers-color-scheme: light)'
+        ).matches;
+
+
+      if (prefereClaro) {
+
+        this.renderer.addClass(
+          body,
+          'light-theme'
+        );
+
+      }
+
+    }
 
   }
 

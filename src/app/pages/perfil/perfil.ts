@@ -77,7 +77,8 @@ export class Perfil {
 
       if (
         typeof usuario.nome ===
-        'string'
+        'string' &&
+        usuario.nome.trim()
       ) {
 
         this.nomeUsuario =
@@ -140,7 +141,7 @@ export class Perfil {
   protected abrirFavoritos(): void {
 
     this.router.navigate([
-      '/feed'
+      '/favoritos'
     ]);
 
   }
@@ -160,7 +161,6 @@ export class Perfil {
     localStorage.removeItem(
       'ritmoLogado'
     );
-
 
     this.router.navigate([
       '/login'
